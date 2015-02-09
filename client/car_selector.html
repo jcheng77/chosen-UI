@@ -1,0 +1,47 @@
+<head>
+  <title>PLX</title>
+</head>
+
+<body>
+  {{>main}}
+</body>
+
+<template name="main">
+  {{#famousContext id="main"}}
+    {{#with car 1}}
+    <!-- header -->
+    {{#Surface id="header" size="[undefined, 60]" translate="[0,0,1000]" opacity="0.5" class="header"}}
+      <div><span>{{serial_name}}<small>{{serial_low_price}}~{{serial_high_price}}</small></span></div>
+    {{/Surface}}
+
+    <!-- images -->
+    {{>Scrollview id="images" template="images" direction="X" paginated="true" size="[undefined, undefined]"}}
+
+    <!-- labels -->
+    {{#ContainerSurface align="[0,.2]" opacity="labelsOpacity" translate="[20,0,0]" id="labels"}}
+      {{#each labels}}
+        {{#Surface size="[200, true]" translate="[0, 26 * {{@index}}, 0]" class="label"}}
+          <div>{{this}}</div>
+        {{/Surface}}
+      {{/each}}
+    {{/ContainerSurface}}
+    
+    <!-- dots -->
+    {{#Surface size="[undefined, true]" align="[0.5, 0]" translate="[0, 70, 1000]"}}
+    <div id="paginator">
+    {{#each hd_pics}}
+    <span class="dot"></span>
+    {{/each}}
+    </div>
+    {{/Surface}}
+    {{/with}}
+  {{/famousContext}}
+</template>
+
+<template name="images">
+{{#famousEach hd_pics}}
+  {{#Surface}}
+  <img src="{{this}}" alt="{{current}}" />
+  {{/Surface}}
+{{/famousEach}}
+</template>
