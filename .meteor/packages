@@ -5,8 +5,9 @@
 # but you can also edit it by hand.
 
 meteor-platform
-autopublish
 insecure
 mjn:famous
 gadicohen:famous-views
 underscore
+iron:router
+fortawesome:fontawesome

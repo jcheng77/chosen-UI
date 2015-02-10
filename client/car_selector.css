@@ -2,27 +2,38 @@
 
 body {
   padding: 0;
-  background-color: #222;
+  background-color: white;
 }
 small {
   font-size: 12px;
   padding-left: 10px;
 }
 .header {
-  background-color: #222;
   color: white;
-  line-height: 60px;
-  padding-left: 20px;
+  line-height: 30px;
   font-size: 20px;
+  text-align: center;
   text-shadow: 0 2px 2px #222;
+  background-color: #222;
+}
+.image {
+  width: 100%;
+  height: 100%;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center top;
 }
 .label {
   height: 25px;
   line-height: 25px;
   color: white;
-  font-size: 10px;
+  font-size: 12px;
   background: url('/images/bg_label2.png') no-repeat;
   padding-left: 20px;
+  margin-top: 10px;
+}
+#paginator {
+  text-align: center;
 }
 .dot {
   display: inline-block;
@@ -30,4 +41,38 @@ small {
   height: 5px;
   border-radius: 5px;
   background-color: #222;
+}
+.dot.active {
+  background-color: white;
+}
+
+.label-inputs {
+  background-color: white;
+  font-size: 13px;
+  color: #222;
+  padding: 10px;
+}
+.label-inputs .fa {
+  padding-right: 10px;
+  background-image: url(images/white_share.svg);
+}
+.avatar {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+}
+.avatar img {
+  width: 100%;
+  height: 100%;
+}
+.m-t {
+  margin-top: 10px;
+}
+.m-2t {
+  margin-top: 30px;
+}
+.label-number {
+  color: blue;
+  padding-right: 5px;
 }

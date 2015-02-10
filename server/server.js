@@ -7,3 +7,9 @@ Meteor.startup(function() {
   });
   delete cars;
 });
+
+Meteor.publish('car', function(serialId) {
+  return Car.find({
+    serial_id: serialId
+  });
+});
