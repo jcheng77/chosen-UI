@@ -25,13 +25,13 @@
 
     <!-- labels on the image-->
     {{#Surface size="[true,true]" translate="[20,50,1000]" id="labels"}}
-      {{#each labels}}
-        <div class="label">{{this}}</div>
+      {{#each labels 5}}
+        <div class="label x{{labelLength this}}">{{this}}</div>
       {{/each}}
     {{/Surface}}
 
     <!-- paginator dots -->
-    {{#Surface size="[100, 20]" align="[0.5,0]" origin="[0.5,0.5]" translate="[0, 230, 1000]"}}
+    {{#Surface size="[100, 20]" align="[0.5,0]" origin="[0.5,0.5]" translate="[0, 260, 1000]"}}
     <div id="paginator">
     {{#each hd_pics}}
     <span class="dot {{#if isCurrentIndex this}}active{{/if}}"></span>
@@ -43,9 +43,9 @@
     <!-- labels inputs -->
     {{#Surface translate="[0,300,1000]" class="label-inputs"}}
     <div class="m-t">
-      <span class="avatar"><img src="/images/avatars/touxiang{{avatarNumber}}.jpg"/></span>
-      <span class="avatar"><img src="/images/avatars/touxiang{{avatarNumber}}.jpg"/></span>
-      <span class="avatar"><img src="/images/avatars/touxiang{{avatarNumber}}.jpg"/></span>
+      {{#each avatarNumbers}}
+      <span class="avatar"><img src="/images/avatars/touxiang{{this}}.jpg"/></span>
+      {{/each}}
     </div>
     <div class="m-2t">
       {{#each labels}}

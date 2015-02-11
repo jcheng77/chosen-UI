@@ -29,10 +29,46 @@ small {
   line-height: 25px;
   color: white;
   font-size: 13px;
-  background: url('/images/bg_label2.png') no-repeat;
   padding-left: 20px;
   margin-top: 10px;
+  background-size: 100% 100%;
+  background-position: left center;
+  background-repeat: no-repeat;
 }
+
+.label.x4 {
+  width: 65px;
+  background-image: url('/images/labels/label-4.png');
+}
+.label.x5 {
+  width: 75px;
+  background-image: url('/images/labels/label-5.png');
+}
+.label.x6 {
+  width: 85px;
+  background-image: url('/images/labels/label-6.png');
+}
+.label.x7 {
+  width: 100px;
+  background-image: url('/images/labels/label-7.png');
+}
+.label.x8 {
+  width: 115px;
+  background-image: url('/images/labels/label-8.png');
+}
+.label.x9 {
+  width: 125px;
+  background-image: url('/images/labels/label-9.png');
+}
+.label.x10 {
+  width: 135px;
+  background-image: url('/images/labels/label-10.png');
+}
+.label.x11 {
+  width: 150px;
+  background-image: url('/images/labels/label-11.png');
+}
+
 #paginator {
   text-align: center;
 }
@@ -52,6 +88,7 @@ small {
   font-size: 13px;
   color: #222;
   padding: 10px;
+  line-height: 20px;
 }
 
 .avatar {
