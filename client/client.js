@@ -19,8 +19,8 @@ Template.main.helpers({
     var current = fview.properties.get('index');
     return current === imageIndex;
   },
-  number: function() {
-    return Math.ceil(Math.random() * 100);
+  avatarNumber: function() {
+    return Math.ceil(Math.random() * 12);
   }
 });
 

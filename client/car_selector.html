@@ -9,13 +9,13 @@
   {{#famousContext id="main"}}
     {{#with car}}
     <!-- header -->
-    {{#Surface id="header" size="[undefined, 30]" translate="[0,0,1000]" opacity="0.5" class="header"}}
+    {{#Surface id="header" size="[undefined, 45]" translate="[0,0,1000]" opacity="0.5" class="header"}}
       <div><span>{{serial_name}}<small>{{serial_low_price}}万~{{serial_high_price}}万</small></span></div>
     {{/Surface}}
 
 
     <!-- images -->
-    {{#Scrollview id="images" direction="X" paginated="true" size="[undefined, 350]"}}
+    {{#Scrollview id="images" direction="X" paginated="true" size="[undefined, 420]" translate="[0,45,999]"}}
       {{#famousEach hd_pics}}
         {{#Surface}}
           <div class="image" style="background-image: url({{this}})"></div>
@@ -24,14 +24,14 @@
     {{/Scrollview}}
 
     <!-- labels on the image-->
-    {{#Surface size="[true,true]" translate="[20,40,1000]" id="labels"}}
+    {{#Surface size="[true,true]" translate="[20,50,1000]" id="labels"}}
       {{#each labels}}
         <div class="label">{{this}}</div>
       {{/each}}
     {{/Surface}}
 
     <!-- paginator dots -->
-    {{#Surface size="[200, 20]" align="[0.5,0]" origin="[0.5,0.5]" translate="[0, 230, 1000]"}}
+    {{#Surface size="[100, 20]" align="[0.5,0]" origin="[0.5,0.5]" translate="[0, 230, 1000]"}}
     <div id="paginator">
     {{#each hd_pics}}
     <span class="dot {{#if isCurrentIndex this}}active{{/if}}"></span>
@@ -41,21 +41,15 @@
 
 
     <!-- labels inputs -->
-    {{#Surface translate="[0,250,1000]" class="label-inputs"}}
-    <div>
-      <span class="fa fa-eye">10</span><span class="fa fa-heart">15</span>
-    </div>
+    {{#Surface translate="[0,300,1000]" class="label-inputs"}}
     <div class="m-t">
-      <span class="avatar"><img src="/images/avatars/jpa.jpg"/></span>
-      <span class="avatar"><img src="/images/avatars/peter.jpg"/></span>
-      <span class="avatar"><img src="/images/avatars/rem.jpg"/></span>
-      <span class="avatar"><img src="/images/avatars/edu.jpg"/></span>
-      <span class="avatar"><img src="/images/avatars/rem.jpg"/></span>
-      <span class="avatar"><img src="/images/avatars/jpa.jpg"/></span>
+      <span class="avatar"><img src="/images/avatars/touxiang{{avatarNumber}}.jpg"/></span>
+      <span class="avatar"><img src="/images/avatars/touxiang{{avatarNumber}}.jpg"/></span>
+      <span class="avatar"><img src="/images/avatars/touxiang{{avatarNumber}}.jpg"/></span>
     </div>
     <div class="m-2t">
       {{#each labels}}
-      <span class="label-text">#{{this}}</span><span class="label-number">({{number}})</span>
+      <span class="label-text">#{{this}}</span><span class="label-number"></span>
       {{/each}}
     </div>
     {{/Surface}}
