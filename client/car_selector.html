@@ -3,6 +3,15 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
   <title>拍立行买车助手</title>
+  <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?57b1e19d8f395734f0e1b028297e950b";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+  </script>
 </head>
 
 <template name="main">
@@ -41,16 +50,18 @@
 
 
     <!-- labels inputs -->
-    {{#Surface translate="[0,300,1000]" class="label-inputs"}}
+    {{#Surface size="[undefined, true]" translate="[0,300,1000]" class="label-inputs"}}
+    <div id="comments">
     <div class="m-t">
       {{#each avatarNumbers}}
       <span class="avatar"><img src="/images/avatars/touxiang{{this}}.jpg"/></span>
       {{/each}}
     </div>
-    <div class="m-2t">
+    <div class="m-2t label-container">
       {{#each labels}}
       <span class="label-text">#{{this}}</span><span class="label-number"></span>
       {{/each}}
+    </div>
     </div>
     {{/Surface}}
     {{/with}}

@@ -89,6 +89,7 @@ small {
   color: #222;
   padding: 10px;
   line-height: 20px;
+  overflow-y: scroll;
 }
 
 .avatar {
@@ -105,6 +106,9 @@ small {
 }
 .m-2t {
   margin-top: 30px;
+}
+.label-container {
+  height: 100px;
 }
 .label-text {
   color: #222;
