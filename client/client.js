@@ -22,7 +22,7 @@ Template.main.helpers({
       serial_id: Session.get('serial_id')
     });
 
-    if (car && number) {
+    if(car && number) {
       return car.labels.splice(0, number);
     } else {
       return car.labels;
@@ -30,9 +30,9 @@ Template.main.helpers({
   },
   labelLength: function(label) {
     var length = label.length;
-    if (length < 4) {
+    if(length < 4) {
       length = 4;
-    } else if (length > 11) {
+    } else if(length > 11) {
       length = 11;
     }
     return length;
@@ -59,13 +59,13 @@ Template.main.events({
         curve: 'easeOut',
         duration: 1000
       });
-      labelsView.modifier.setTransform(famous.core.Transform.translate(20,50,0));
+      labelsView.modifier.setTransform(famous.core.Transform.translate(20, 50, 0));
     } else {
       labelsView.modifier.setOpacity(1, {
         curve: 'easeOut',
         duration: 1000
       });
-      labelsView.modifier.setTransform(famous.core.Transform.translate(20,50,1000));
+      labelsView.modifier.setTransform(famous.core.Transform.translate(20, 50, 1000));
     }
     labelVisbile = !labelVisbile;
   }

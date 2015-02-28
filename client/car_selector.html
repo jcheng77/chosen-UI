@@ -24,7 +24,7 @@ var _hmt = _hmt || [];
 
 
     <!-- images -->
-    {{#Scrollview id="images" direction="X" paginated="true" size="[undefined, 420]" translate="[0,45,999]"}}
+    {{#Scrollview id="images" direction="X" paginated="true" proportions="[1,0.5]" translate="[0,45,999]"}}
       {{#famousEach hd_pics}}
         {{#Surface}}
           <div class="image" style="background-image: url({{this}})"></div>
@@ -40,7 +40,7 @@ var _hmt = _hmt || [];
     {{/Surface}}
 
     <!-- paginator dots -->
-    {{#Surface size="[100, 20]" align="[0.5,0]" origin="[0.5,0.5]" translate="[0, 260, 1000]"}}
+    {{#Surface size="[100, 20]" align="[0.5,0.5]" origin="[0.5,0.5]" translate="[0, 35, 1000]"}}
     <div id="paginator">
     {{#each hd_pics}}
     <span class="dot {{#if isCurrentIndex this}}active{{/if}}"></span>
@@ -50,20 +50,22 @@ var _hmt = _hmt || [];
 
 
     <!-- labels inputs -->
-    {{#Surface size="[undefined, true]" translate="[0,300,1000]" class="label-inputs"}}
-    <div id="comments">
+    {{#Scrollview direction="Y" paginated="false" proportions="[1,0.5]" align="[0,0.5]" translate="[0,45,1000]"}}
+    {{#Surface size="[undefined, true]"}}
     <div class="m-t">
       {{#each avatarNumbers}}
       <span class="avatar"><img src="/images/avatars/touxiang{{this}}.jpg"/></span>
       {{/each}}
     </div>
+    {{/Surface}}
+    {{#Surface class="label-inputs" size="[undefined, true]"}}
     <div class="m-2t label-container">
       {{#each labels}}
       <span class="label-text">#{{this}}</span><span class="label-number"></span>
       {{/each}}
     </div>
-    </div>
     {{/Surface}}
+    {{/Scrollview}}
     {{/with}}
   {{/famousContext}}
 </template>
