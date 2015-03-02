@@ -4,12 +4,8 @@
 ### Set up? ###
 
 ```
-#!shell
-#install meteor from meteor.com
 curl http://install.meteor.com| sh
-#dev & test
 meteor
-
 ```
 
 
