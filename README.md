@@ -16,9 +16,8 @@ meteor
 ###publish?###
 
 ```
-#!shell
-
-#hosted in baidu app engine, see steps in publish.sh
+git remote add dokku dokku@boluo.me:m
+git push dokku master
 ```
 
 
