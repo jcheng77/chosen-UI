@@ -50,7 +50,7 @@ var _hmt = _hmt || [];
 
 
     <!-- labels inputs -->
-    {{#Scrollview direction="Y" paginated="false" proportions="[1,0.5]" align="[0,0.5]" translate="[0,45,1000]"}}
+    {{#Scrollview direction="Y" paginated="false" proportions="[1,0.5]" align="[0,0.5]" translate="[0,45,998]"}}
     {{#Surface size="[undefined, true]"}}
     <div class="m-t">
       {{#each avatarNumbers}}
@@ -64,6 +64,8 @@ var _hmt = _hmt || [];
       <span class="label-text">#{{this}}</span><span class="label-number"></span>
       {{/each}}
     </div>
+    {{/Surface}}
+    {{#Surface size="[undefined, 50]"}}
     {{/Surface}}
     {{/Scrollview}}
     {{/with}}
