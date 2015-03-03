@@ -94,7 +94,7 @@ small {
   font-size: 13px;
   color: #222;
   padding: 10px;
-  line-height: 22px;
+  line-height: 25px;
   overflow-y: scroll;
 }
 
@@ -109,6 +109,9 @@ small {
 }
 .m-t {
   margin-top: 10px;
+}
+.m-l {
+  margin-left: 10px;
 }
 .m-2t {
   margin-top: 30px;
@@ -126,7 +129,7 @@ small {
 h4.label-heading {
   font-weight: normal;  
   padding-left: 5px;
-  margin: 5px 0;
+  margin: 10px 0;
 }
 .label-heading.green {
   border-left: 5px solid #26c281;
