@@ -59,10 +59,19 @@ var _hmt = _hmt || [];
     </div>
     {{/Surface}}
     {{#Surface class="label-inputs" size="[undefined, true]"}}
-    <div class="m-2t label-container">
-      {{#each labels}}
+    <div class="m-t label-container">
+      <h4 class="label-heading green">
+      车主好评
+      </h4>  
+      {{#each goodComments}}
       <span class="label-text">#{{this}}</span><span class="label-number"></span>
       {{/each}}
+      <h4 class="label-heading yellow">
+      车主差评
+      </h4>
+      {{#each badComments}}
+      <span class="label-text">#{{this}}</span><span class="label-number"></span>
+      {{/each}}  
     </div>
     {{/Surface}}
     {{#Surface size="[undefined, 50]"}}

@@ -48,6 +48,18 @@ Template.main.helpers({
   },
   avatarNumbers: function() {
     return gen3Numbers(11);
+  },
+  goodComments: function() {
+    var car = Car.findOne({
+      serial_id: Session.get('serial_id')
+    });
+    return car.good_comments.split('|');
+  },
+  badComments: function() {
+    var car = Car.findOne({
+      serial_id: Session.get('serial_id')
+    });
+    return car.bad_comments.split('|');
   }
 });
 

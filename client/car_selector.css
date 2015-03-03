@@ -94,14 +94,14 @@ small {
   font-size: 13px;
   color: #222;
   padding: 10px;
-  line-height: 20px;
+  line-height: 22px;
   overflow-y: scroll;
 }
 
 .avatar {
   display: inline-block;
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  height: 35px;
 }
 .avatar img {
   width: 100%;
@@ -122,4 +122,15 @@ small {
 }
 .famous-root {
   overflow-y:scroll;
+}
+h4.label-heading {
+  font-weight: normal;  
+  padding-left: 5px;
+  margin: 5px 0;
+}
+.label-heading.green {
+  border-left: 5px solid #26c281;
+}
+.label-heading.yellow {
+  border-left: 5px solid #faa400;
 }
