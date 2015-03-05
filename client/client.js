@@ -60,6 +60,9 @@ Template.main.helpers({
       serial_id: Session.get('serial_id')
     });
     return car.bad_comments.split('|');
+  },
+  jsApiReady: function() {
+    return Session.get('wxJsApiReady');
   }
 });
 
@@ -82,5 +85,21 @@ Template.main.events({
       });
     }
     labelVisbile = !labelVisbile;
+  },
+  'click .ico-share': function(e, t) {
+    var car = Car.findOne({
+      serial_id: Session.get('serial_id')
+    });
+    wx && wx.onMenuShareTimeline({
+      title: car.serial_name, // 分享标题
+      link: Router.current().originalUrl, // 分享链接
+      imgUrl: 'http://data.auto.qq.com/'+ car.serial_pic, // 分享图标
+      success: function () {
+        // 用户确认分享后执行的回调函数
+      },
+      cancel: function () {
+        // 用户取消分享后执行的回调函数
+      }
+    });
   }
 });

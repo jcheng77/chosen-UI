@@ -12,6 +12,7 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
   </script>
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 </head>
 
 <template name="main">
@@ -19,7 +20,9 @@ var _hmt = _hmt || [];
     {{#with car}}
     <!-- header -->
     {{#Surface id="header" size="[undefined, 45]" translate="[0,0,1000]" opacity="0.5" class="header"}}
-      <div><span>{{serial_name}}<small>{{serial_low_price}}万~{{serial_high_price}}万</small></span></div>
+      <div><span>{{serial_name}}<small>{{serial_low_price}}万~{{serial_high_price}}万</small></span>
+      {{#if jsApiReady}}<a class="ico-share"><img src="/images/white_share.png"/></a>{{/if}}
+      </div>
     {{/Surface}}
 
 
@@ -64,7 +67,7 @@ var _hmt = _hmt || [];
     <div class="label-container">
       <h4 class="label-heading green">
       车主好评
-      </h4>  
+      </h4>
       {{#each goodComments}}
       <span class="label-text">#{{this}}</span><span class="label-number"></span>
       {{/each}}
@@ -73,7 +76,7 @@ var _hmt = _hmt || [];
       </h4>
       {{#each badComments}}
       <span class="label-text">#{{this}}</span><span class="label-number"></span>
-      {{/each}}  
+      {{/each}}
     </div>
     {{/Surface}}
     {{#Surface size="[undefined, 50]"}}

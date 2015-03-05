@@ -127,7 +127,7 @@ small {
   overflow-y:scroll;
 }
 h4.label-heading {
-  font-weight: normal;  
+  font-weight: normal;
   padding-left: 5px;
   margin: 10px 0;
 }
@@ -136,4 +136,14 @@ h4.label-heading {
 }
 .label-heading.yellow {
   border-left: 5px solid #faa400;
+}
+.ico-share {
+  float: right;
+  width: 30px;
+  height: 40px;
+  padding: 0 5px 0 0;
+}
+.ico-share img {
+  width: 100%;
+  height: 100%;
 }
