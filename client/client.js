@@ -70,14 +70,16 @@ Template.main.events({
       labelsView.modifier.setOpacity(0, {
         curve: 'easeOut',
         duration: 1000
+      }, function() {
+        labelsView.modifier.setTransform(famous.core.Transform.translate(20, 50, 0));
       });
-      labelsView.modifier.setTransform(famous.core.Transform.translate(20, 50, 0));
     } else {
       labelsView.modifier.setOpacity(1, {
         curve: 'easeOut',
-        duration: 1000
+        duration: 200
+      }, function() {
+        labelsView.modifier.setTransform(famous.core.Transform.translate(20, 50, 1000));
       });
-      labelsView.modifier.setTransform(famous.core.Transform.translate(20, 50, 1000));
     }
     labelVisbile = !labelVisbile;
   }
