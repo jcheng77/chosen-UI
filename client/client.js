@@ -107,6 +107,7 @@ Template.main.events({
     if (goodComments && goodComments.length > 3) {
       goodComments = goodComments.splice(0, 3);
     }
+    wx.showOptionMenu();
     wx.onMenuShareTimeline({
       title: '我正在考虑选购' + car.serial_name + ',请身边高手点评一下吧',
       link: Router.current().originalUrl,
@@ -129,5 +130,6 @@ Template.main.events({
     }, function() {
       modifier.setTransform(famous.core.Transform.translate(0, 0, 0));
     });
+    wx.hideOptionMenu();
   }
 });

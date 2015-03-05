@@ -9,7 +9,7 @@ var configWeixinJsApi = function() {
     if (config && wx) {
       wx.ready(function() {
         Session.set('wxJsApiReady', true);
-
+        wx.hideOptionMenu();
       });
       wx.error(function(res) {
         Session.set('wxJsApiReady', false);
