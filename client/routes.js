@@ -9,18 +9,54 @@ var configWeixinJsApi = function() {
     if (config && wx) {
       wx.ready(function() {
         Session.set('wxJsApiReady', true);
+
       });
       wx.error(function(res) {
-        alert(res.errMsg);
+        Session.set('wxJsApiReady', false);
       });
 
       wx.config({
-        debug: true,
+        debug: false,
         appId: appId, // 必填，公众号的唯一标识
         timestamp: config.timestamp, // 必填，生成签名的时间戳
         nonceStr: config.nonceStr, // 必填，生成签名的随机串
         signature: config.signature,// 必填，签名，见附录1
-        jsApiList: ['onMenuShareTimeline'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        jsApiList: [
+        'checkJsApi',
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage',
+        'onMenuShareQQ',
+        'onMenuShareWeibo',
+        'hideMenuItems',
+        'showMenuItems',
+        'hideAllNonBaseMenuItem',
+        'showAllNonBaseMenuItem',
+        'translateVoice',
+        'startRecord',
+        'stopRecord',
+        'onRecordEnd',
+        'playVoice',
+        'pauseVoice',
+        'stopVoice',
+        'uploadVoice',
+        'downloadVoice',
+        'chooseImage',
+        'previewImage',
+        'uploadImage',
+        'downloadImage',
+        'getNetworkType',
+        'openLocation',
+        'getLocation',
+        'hideOptionMenu',
+        'showOptionMenu',
+        'closeWindow',
+        'scanQRCode',
+        'chooseWXPay',
+        'openProductSpecificView',
+        'addCard',
+        'chooseCard',
+        'openCard'
+        ]
       });
     }
   });
@@ -33,8 +69,8 @@ Router.route('/car/:serial_id', {
     Session.set('serial_id', serial_id);
     this.subscribe('car', serial_id);
   },
-  onAfterAction: function() {
-    if (!Session.get("wxJsApiConfigured")) {
+  onRun: function() {
+    if (!Session.get("wxJsApiReady")) {
       configWeixinJsApi();
     }
   }

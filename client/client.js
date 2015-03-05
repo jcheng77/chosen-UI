@@ -66,6 +66,7 @@ Template.main.helpers({
   }
 });
 
+var eventHandling = false;
 Template.main.events({
   'click .image': function(e, t) {
     var labelsView = FView.byId('labels');
@@ -87,32 +88,46 @@ Template.main.events({
     labelVisbile = !labelVisbile;
   },
   'click .ico-share': function(e, t) {
-    e.preventDefault();
+    // alert(e.target)
+    var modifier = FView.byId('guide').modifier;
+    modifier.setTransform(famous.core.Transform.translate(0, 0, 1001), {
+      curve: 'easeIn',
+      duration: 500
+    }, function() {
+      modifier.setOpacity(0.8, {
+        curve: 'easeIn',
+        duration: 200
+      });
+    });
+
     var car = Car.findOne({
       serial_id: Session.get('serial_id')
     });
-    wx.checkJsApi({
-      jsApiList: [
-        'onMenuShareTimeline'
-      ],
-      success: function (res) {
-        alert(JSON.stringify(res));
-      }
-    });
+    var goodComments = car.good_comments.split('|');
+    if (goodComments && goodComments.length > 3) {
+      goodComments = goodComments.splice(0, 3);
+    }
     wx.onMenuShareTimeline({
-      title: car.serial_name, // 分享标题
-      link: Router.current().originalUrl, // 分享链接
-      imgUrl: 'http://data.auto.qq.com/'+ car.serial_pic, // 分享图标
-      success: function () {
-        alert('test')
-
-        // 用户确认分享后执行的回调函数
-      },
-      cancel: function () {
-        alert('test!')
-
-        // 用户取消分享后执行的回调函数
-      }
+      title: '我正在考虑选购' + car.serial_name + ',请身边高手点评一下吧',
+      link: Router.current().originalUrl,
+      imgUrl: 'http://data.auto.qq.com/' + car.serial_pic
+    });
+    wx.onMenuShareAppMessage({
+      title: '我正在考虑选购' + car.serial_name + ',请身边高手点评一下吧',
+      desc: goodComments.join('; '),
+      link: Router.current().originalUrl,
+      imgUrl: 'http://data.auto.qq.com/' + car.serial_pic,
+    });
+    e.stopPropagation();
+  },
+  'click .guide': function(e) {
+    // alert(e.target);
+    var modifier = FView.byId('guide').modifier;
+    modifier.setOpacity(0, {
+      curve: 'easeOut',
+      duration: 1000
+    }, function() {
+      modifier.setTransform(famous.core.Transform.translate(0, 0, 0));
     });
   }
 });

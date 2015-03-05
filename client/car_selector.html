@@ -21,7 +21,7 @@ var _hmt = _hmt || [];
     <!-- header -->
     {{#Surface id="header" size="[undefined, 45]" translate="[0,0,1000]" opacity="0.5" class="header"}}
       <div><span>{{serial_name}}<small>{{serial_low_price}}万~{{serial_high_price}}万</small></span>
-      <a class="ico-share"><img src="/images/white_share.png"/></a>
+      <a id="share" class="ico-share"><img src="/images/white_share.png"/></a>
       </div>
     {{/Surface}}
 
@@ -77,11 +77,22 @@ var _hmt = _hmt || [];
       {{#each badComments}}
       <span class="label-text">#{{this}}</span><span class="label-number"></span>
       {{/each}}
+      <div id="footer">
+        <a href="http://mp.weixin.qq.com/s?__biz=MzAwNzE2MzA4Ng==&mid=204194013&idx=1&sn=0d8f1523b95afc5a46e071beeb80f06b#rd">关注公众号</a>
+      </div>
     </div>
     {{/Surface}}
-    {{#Surface size="[undefined, 50]"}}
+    {{#Surface size="[undefined, 60]"}}
     {{/Surface}}
     {{/Scrollview}}
+
+    <!-- guide -->
+    {{#Surface id="guide" class="guide" opacity="0" translate="[0,0,0]"}}
+    <img src="/images/guide.png"/>
+    {{/Surface}}
     {{/with}}
   {{/famousContext}}
+</template>
+<template name="test">
+<button id="test">Test</button>
 </template>
