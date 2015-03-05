@@ -17,8 +17,9 @@ small {
 .header {
   color: white;
   line-height: 45px;
+  padding-left: 10px;
   font-size: 28px;
-  text-align: center;
+  text-align: left;
   text-shadow: 0 2px 2px #222;
   background-color: #222;
 }

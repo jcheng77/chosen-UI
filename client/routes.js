@@ -9,6 +9,9 @@ var configWeixinJsApi = function() {
       wx.ready(function() {
         Session.set('wxJsApiReady', true);
       });
+      wx.error(function(res) {
+        alert(res);
+      });
 
       wx.config({
         debug: true,
