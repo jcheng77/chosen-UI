@@ -24,13 +24,15 @@ var _hmt = _hmt || [];
 
 
     <!-- images -->
-    {{#Scrollview id="images" direction="X" paginated="true" proportions="[1,0.5]" translate="[0,45,999]"}}
+    {{#ContainerSurface proportions="[1,0.5]" translate="[0,45,999]" overflow="hidden"}}
+    {{#Scrollview id="images" direction="X" paginated="true"}}
       {{#famousEach hd_pics}}
         {{#Surface}}
           <div class="image" style="background-image: url({{this}})"></div>
         {{/Surface}}
       {{/famousEach}}
     {{/Scrollview}}
+    {{/ContainerSurface}}
 
     <!-- labels on the image-->
     {{#Surface size="[true,true]" translate="[20,50,1000]" id="labels"}}
