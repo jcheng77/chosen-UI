@@ -87,10 +87,19 @@ Template.main.events({
     labelVisbile = !labelVisbile;
   },
   'click .ico-share': function(e, t) {
+    e.preventDefault();
     var car = Car.findOne({
       serial_id: Session.get('serial_id')
     });
-    wx && wx.onMenuShareTimeline({
+    wx.checkJsApi({
+      jsApiList: [
+        'onMenuShareTimeline'
+      ],
+      success: function (res) {
+        alert(JSON.stringify(res));
+      }
+    });
+    wx.onMenuShareTimeline({
       title: car.serial_name, // 分享标题
       link: Router.current().originalUrl, // 分享链接
       imgUrl: 'http://data.auto.qq.com/'+ car.serial_pic, // 分享图标
