@@ -1,28 +1,27 @@
 var appId = 'wxcda8da689f673ea2';
 var configWeixinJsApi = function() {
   // 配置微信jSAPI
-  var nonceStr = parseInt((Math.random() * 100000000000), 10),
-    timestamp = new Date().getTime(),
-    url = Router.current().originalUrl;
-  Meteor.call('getJsApiSignature', nonceStr, timestamp, url, function(error, signature) {
-    if (signature && wx) {
+  var url = Router.current().originalUrl;
+
+  // 避免router切换时候重复配置
+  Session.set('wxJsApiConfigured', true);
+  Meteor.call('getJsApiSignature', url, function(error, config) {
+    if (config && wx) {
       wx.ready(function() {
         Session.set('wxJsApiReady', true);
       });
       wx.error(function(res) {
-        alert(res);
+        alert(res.errMsg);
       });
 
       wx.config({
         debug: true,
-        appId: appId,
-        nonceStr: nonceStr,
-        timestamp: timestamp,
-        signature: signature,
-        jsApiList: ['onMenuShareTimeline']
+        appId: appId, // 必填，公众号的唯一标识
+        timestamp: config.timestamp, // 必填，生成签名的时间戳
+        nonceStr: config.nonceStr, // 必填，生成签名的随机串
+        signature: config.signature,// 必填，签名，见附录1
+        jsApiList: ['onMenuShareTimeline'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
       });
-      // 避免router切换时候重复配置
-      Session.set('wxJsApiConfigured', true);
     }
   });
 };

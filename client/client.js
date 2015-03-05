@@ -95,9 +95,13 @@ Template.main.events({
       link: Router.current().originalUrl, // 分享链接
       imgUrl: 'http://data.auto.qq.com/'+ car.serial_pic, // 分享图标
       success: function () {
+        alert('test')
+
         // 用户确认分享后执行的回调函数
       },
       cancel: function () {
+        alert('test!')
+
         // 用户取消分享后执行的回调函数
       }
     });

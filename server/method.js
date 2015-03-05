@@ -73,13 +73,8 @@ Meteor.methods({
     }
     return jsApiTicket && jsApiTicket.ticket;
   },
-  getJsApiSignature: function(nonceStr, timestamp, url) {
+  getJsApiSignature: function(url) {
     var ticket = Meteor.call('getJsApiTicket') || '';
-    var crypto = Npm.require('crypto');
-    var shasum = crypto.createHash('sha1');
-    var arr = ['noncestr=' + nonceStr, 'timestamp=' + timestamp, 'jsapi_ticket=' + ticket, 'url=' + url].sort();
-    var string1 = arr.join('&');
-    shasum.update(string1);
-    return shasum.digest('hex');
+    return Wechat.sign(ticket, url);
   }
 });
