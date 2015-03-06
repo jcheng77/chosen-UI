@@ -62,6 +62,8 @@ var configWeixinJsApi = function() {
   });
 };
 
+var subs = new SubsManager();
+
 Router.route('/car/:serial_id', {
   template: 'car',
   waitOn: function() {
@@ -69,12 +71,15 @@ Router.route('/car/:serial_id', {
     if(Meteor.isClient) {
       Session.set('serial_id', serial_id);
     }
-    Meteor.subscribe('car', serial_id);
+    subs.subscribe('car', serial_id);
+    subs.subscribe('view_count', serial_id);
   },
   onRun: function() {
     if(!Session.get("wxJsApiReady")) {
       configWeixinJsApi();
     }
+    var serial_id = Session.get('serial_id');
+    Meteor.call('increaseViewCount', serial_id);
   },
   fastRender: true
 });

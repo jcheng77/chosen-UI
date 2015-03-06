@@ -30,6 +30,7 @@ Meteor.methods({
             expiresIn: tokenRes.data["expires_in"],
             createdDate: new Date()
           };
+          //TODO - make upsert defer
           AccessToken.upsert({
             appId: appId
           }, accessToken);
@@ -57,8 +58,9 @@ Meteor.methods({
               appId: appId,
               ticket: ticket,
               expiresIn: ticketRes.data["expires_in"],
-              createdDate: new Date()
+               createdDate: new Date()
             };
+            // TODO - make upsert defer
             JsApiTicket.upsert({
               appId: appId
             }, jsApiTicket);
@@ -76,5 +78,8 @@ Meteor.methods({
   getJsApiSignature: function(url) {
     var ticket = Meteor.call('getJsApiTicket') || '';
     return Wechat.sign(ticket, url);
+  },
+  increaseViewCount: function(serial_id) {
+    ViewCount.upsert({serial_id: serial_id}, {$inc: {count: 1}, $set: {serial_id: serial_id}});
   }
 });

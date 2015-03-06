@@ -63,6 +63,13 @@ Template.car.helpers({
   },
   jsApiReady: function() {
     return Session.get('wxJsApiReady');
+  },
+  viewCount: function() {
+    var viewCount = ViewCount.findOne({
+      serial_id: Session.get('serial_id')
+    });
+    var count = viewCount ? viewCount.count : 0;
+    return count + 50;
   }
 });
 
@@ -110,13 +117,13 @@ Template.car.events({
     wx.onMenuShareTimeline({
       title: '我正在考虑选购' + car.serial_name + ',请身边高手点评一下吧',
       link: Router.current().originalUrl,
-      imgUrl: 'http://data.auto.qq.com/' + car.serial_pic
+      imgUrl: car.hd_pics.length && car.hd_pics[0]
     });
     wx.onMenuShareAppMessage({
       title: '我正在考虑选购' + car.serial_name + ',请身边高手点评一下吧',
       desc: goodComments.join('; '),
       link: Router.current().originalUrl,
-      imgUrl: 'http://data.auto.qq.com/' + car.serial_pic,
+      imgUrl: car.hd_pics.length && car.hd_pics[0]
     });
     e.stopPropagation();
   },

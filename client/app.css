@@ -162,3 +162,18 @@ h4.label-heading {
 #footer a {
   color: #666;
 }
+.view-count {
+  color: #666;
+  font-size:12px;
+  line-height: 12px;
+}
+.ico-eye {
+  display: inline-block;
+  width: 22px;
+  height: 12px;
+  margin-right: 5px;
+  background-image: url("/images/eye.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
