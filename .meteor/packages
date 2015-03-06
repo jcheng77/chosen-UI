@@ -12,3 +12,4 @@ underscore
 iron:router
 http
 wechat:sign
+meteorhacks:fast-render
