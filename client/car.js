@@ -11,7 +11,7 @@ function gen3Numbers(biggest) {
   return numbers;
 }
 
-Template.main.helpers({
+Template.car.helpers({
   car: function() {
     return Car.findOne({
       serial_id: Session.get('serial_id')
@@ -66,8 +66,7 @@ Template.main.helpers({
   }
 });
 
-var eventHandling = false;
-Template.main.events({
+Template.car.events({
   'click .image': function(e, t) {
     var labelsView = FView.byId('labels');
     if(labelVisbile) {
@@ -104,7 +103,7 @@ Template.main.events({
       serial_id: Session.get('serial_id')
     });
     var goodComments = car.good_comments.split('|');
-    if (goodComments && goodComments.length > 3) {
+    if(goodComments && goodComments.length > 3) {
       goodComments = goodComments.splice(0, 3);
     }
     wx.showOptionMenu();
