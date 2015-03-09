@@ -21,3 +21,21 @@ Meteor.publish('view_count', function(serialId) {
     serial_id: serialId
   });
 });
+
+Meteor.publish('similar_cars', function(serialId) {
+  var car = Car.findOne({
+    serial_id: serialId
+  });
+  var similar_ids = _(car.serial_competion).map(function(comp) {
+    return parseInt(comp.serial_id,10);
+  });
+  if(car) {
+    return Car.find({
+      serial_id: {
+        $in: similar_ids
+      }
+    });
+  } else {
+    return [];
+  }
+});

@@ -64,6 +64,10 @@ var configWeixinJsApi = function() {
 
 var subs = new SubsManager();
 
+Router.configure({
+  layoutTemplate: 'layout'
+});
+
 Router.route('/car/:serial_id', {
   template: 'car',
   waitOn: function() {
@@ -80,6 +84,22 @@ Router.route('/car/:serial_id', {
     }
     var serial_id = Session.get('serial_id');
     Meteor.call('increaseViewCount', serial_id);
+  },
+  fastRender: true
+});
+
+Router.route('/car/:serial_id/similars', {
+  template: 'similars',
+  waitOn: function() {
+    var serial_id = parseInt(this.params.serial_id, 10);
+    if(Meteor.isClient) {
+      Session.set('serial_id', serial_id);
+    }
+    subs.subscribe('car', serial_id);
+    subs.subscribe('similar_cars', serial_id);
+  },
+  onRun: function() {
+    configWeixinJsApi();
   },
   fastRender: true
 });

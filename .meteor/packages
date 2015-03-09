@@ -4,13 +4,31 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-meteor-platform
+# Regular packages
+meteor
+webapp
+logging
+tracker
+session
+ddp
+mongo
+blaze
+spacebars
+templating
+random
+ejson
 insecure
-mjn:famous
-gadicohen:famous-views
 underscore
-iron:router
+jquery
 http
+check
+reload
+autoupdate
+
+# Personal
 wechat:sign
 meteorhacks:fast-render
 meteorhacks:subs-manager
+iron:router
+mjn:famous
+gadicohen:famous-views

@@ -23,7 +23,7 @@
     <!-- labels on the image-->
     {{#Surface size="[true,true]" translate="[20,50,1000]" id="labels"}}
       {{#each labels 5}}
-        <div class="label x{{labelLength this}}">{{this}}</div>
+        <div class="label x{{labelLength this}}">{{cutLabel this}}</div>
       {{/each}}
     {{/Surface}}
 
@@ -54,13 +54,13 @@
       <h4 class="label-heading green">
       车主好评
       </h4>
-      {{#each goodComments}}
+      {{#each goodComments serial_id}}
       <span class="label-text">#{{this}}</span><span class="label-number"></span>
       {{/each}}
       <h4 class="label-heading yellow">
       车主差评
       </h4>
-      {{#each badComments}}
+      {{#each badComments serial_id}}
       <span class="label-text">#{{this}}</span><span class="label-number"></span>
       {{/each}}
       <div id="footer">
@@ -72,9 +72,18 @@
     {{/Surface}}
     {{/Scrollview}}
 
-    <!-- guide -->
+    <!-- share guide -->
     {{#Surface id="guide" class="guide" opacity="0" translate="[0,0,0]"}}
     <img src="/images/guide.png"/>
+    {{/Surface}}
+
+    <!-- similars link icon -->
+    {{#Surface id="similars-link" size="[true, true]" align="[1,1]" origin="[1,1]" translate="[-130,-50,1000]"}}
+    <div>
+      <a href="/car/{{serial_id}}/similars">
+        <img src="/images/small-car-icon.png" />
+      </a>
+    </div>
     {{/Surface}}
     {{/with}}
   {{/famousContext}}

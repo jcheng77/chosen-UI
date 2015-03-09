@@ -13,6 +13,9 @@ small {
     width: 600px;
     margin: 0 auto;
   }
+  #main .container {
+    text-align: center;
+  }
 }
 .header {
   color: white;
@@ -96,7 +99,6 @@ small {
   color: #222;
   padding: 10px;
   line-height: 25px;
-  overflow-y: scroll;
 }
 
 .avatar {
@@ -123,9 +125,6 @@ small {
 .label-number {
   color: blue;
   padding-right: 8px;
-}
-.famous-root {
-  overflow-y:scroll;
 }
 h4.label-heading {
   font-weight: normal;
@@ -176,4 +175,54 @@ h4.label-heading {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+}
+
+/* similar cars */
+#similars-header {
+  text-align: center;
+}
+.car-item {
+  text-align: center;
+}
+.car-item  {
+  min-height: 250px;
+  margin-top: 20px;
+}
+.car-item img {
+  width: 100%;
+  height: auto;
+}
+.car-item .car-image {
+  position: relative;
+  font-size: 14px;
+  font-weight: bold;
+}
+.car-item .car-image .car-name {
+  position: absolute;
+  left: 10px;
+  bottom: 20px;
+  color: white;
+}
+.car-item .car-image .car-price {
+  position: absolute;
+  right: 10px;
+  bottom: 20px;
+  color: white;
+}
+.car-item .car-comments {
+  color: #666;
+  font-size: 12px;
+  text-align: left;
+}
+.car-item .car-comments p {
+  margin-top: 0;
+}
+.bold {
+  font-weight: bold;
+}
+.back-link {
+  float: left;
+  color: #666;
+  text-decoration: none;
+  font-size: 20px;
 }
