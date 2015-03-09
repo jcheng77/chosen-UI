@@ -70,6 +70,7 @@ Router.configure({
 
 Router.route('/car/:serial_id', {
   template: 'car',
+  name: 'car.comments',
   waitOn: function() {
     var serial_id = parseInt(this.params.serial_id, 10);
     if(Meteor.isClient) {
@@ -90,6 +91,7 @@ Router.route('/car/:serial_id', {
 
 Router.route('/car/:serial_id/similars', {
   template: 'similars',
+  name: "car.similars",
   waitOn: function() {
     var serial_id = parseInt(this.params.serial_id, 10);
     if(Meteor.isClient) {

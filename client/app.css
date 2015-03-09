@@ -2,11 +2,15 @@
 
 body {
   padding: 0;
+  margin: 0;
   background-color: white;
 }
 small {
   font-size: 12px;
   padding-left: 10px;
+}
+#main {
+  position: relative;
 }
 @media screen and (min-width: 600px) {
   #main {
@@ -17,22 +21,29 @@ small {
     text-align: center;
   }
 }
-.header {
+#header {
   color: white;
   line-height: 45px;
   padding-left: 10px;
   font-size: 28px;
   text-align: left;
   text-shadow: 0 2px 2px #222;
-  background-color: #222;
+  background-color: rgba(34, 34, 34, 0.5);
 }
-.image {
+#slider {
+  position: relative;
+  min-height: 200px;
+}
+#slider .item img {
+  display: block;
   width: 100%;
-  height: 100%;
-  background-color: white;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
+  height: auto;
+}
+#labels {
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  z-index: 100;
 }
 .label {
   height: 25px;
@@ -41,11 +52,11 @@ small {
   font-size: 13px;
   padding-left: 20px;
   margin-top: 10px;
+  margin-left: 10px;
   background-size: 100% 100%;
   background-position: left center;
   background-repeat: no-repeat;
 }
-
 .label.x4 {
   width: 65px;
   background-image: url('/images/labels/label-4.png');
@@ -78,29 +89,13 @@ small {
   width: 150px;
   background-image: url('/images/labels/label-11.png');
 }
-
-#paginator {
-  text-align: center;
-}
-.dot {
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  border-radius: 5px;
-  background-color: #222;
-}
-.dot.active {
-  background-color: white;
-}
-
-.label-inputs {
+#label-inputs {
   background-color: white;
   font-size: 13px;
   color: #222;
   padding: 10px;
   line-height: 25px;
 }
-
 .avatar {
   display: inline-block;
   width: 35px;
@@ -147,12 +142,6 @@ h4.label-heading {
   width: 100%;
   height: 100%;
 }
-.guide {
-  background-color: #2c2c2c;
-}
-.guide img {
-  float: right;
-}
 #footer {
   margin-top: 20px;
   border-top: 1px solid #f2f2f2;
@@ -163,7 +152,7 @@ h4.label-heading {
 }
 .view-count {
   color: #666;
-  font-size:12px;
+  font-size: 12px;
   line-height: 12px;
 }
 .ico-eye {
@@ -176,17 +165,30 @@ h4.label-heading {
   background-size: contain;
   background-position: center;
 }
-
+#guide {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(34, 34, 34, 0.7);
+  z-index: 101;
+}
+#guide img {
+  float: right;
+}
 /* similar cars */
+
 #similars-header {
   text-align: center;
 }
 .car-item {
   text-align: center;
 }
-.car-item  {
+.car-item {
   min-height: 250px;
-  margin-top: 20px;
+  margin: 20px 10px;
 }
 .car-item img {
   width: 100%;
@@ -210,9 +212,11 @@ h4.label-heading {
   color: white;
 }
 .car-item .car-comments {
+  margin-top: 5px;
   color: #666;
   font-size: 12px;
   text-align: left;
+  border-bottom: 1px solid rgba(34,34,34,0.3);
 }
 .car-item .car-comments p {
   margin-top: 0;
@@ -220,9 +224,24 @@ h4.label-heading {
 .bold {
   font-weight: bold;
 }
-.back-link {
-  float: left;
-  color: #666;
-  text-decoration: none;
-  font-size: 20px;
+#similars-link {
+  cursor: pointer;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 60px;
+  height: 20px;
+}
+#similars-link img {
+  width: 100%;
+  height: 100%;
+}
+/* misc */
+.owl-theme .owl-controls {
+  margin-top: 0;
+}
+.owl-theme .owl-dots .owl-dot span {
+  width: 5px;
+  height: 5px;
+  margin: 2px;
 }

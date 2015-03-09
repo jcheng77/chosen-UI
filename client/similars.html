@@ -1,14 +1,12 @@
 <template name="similars">
   <div id="main">
     <div id="similars-header">
-      <h4>猜你喜欢<a class="back-link" href="/car/{{serialId}}">&lt;</a></h4>
+      <h4>猜你喜欢</h4>
     </div>
     {{#each similarCars}}
-    <div class="car-item">
+    <div class="car-item animated fadeInRight">
       <div class="car-image">
-        <a href="/car/{{serial_id}}">
-          <img src="http://data.auto.qq.com/{{serial_pic}}" />
-        </a>
+        <img src="http://data.auto.qq.com/{{serial_pic}}" />
         <span class="car-name">{{serial_name}}</span>
         <span class="car-price">{{serial_low_price}}万-{{serial_high_price}}万</span>
       </div>

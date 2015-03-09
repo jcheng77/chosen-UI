@@ -1,90 +1,72 @@
 <template name="car">
-  {{#famousContext id="main"}}
-    {{#with car}}
-    <!-- header -->
-    {{#Surface id="header" size="[undefined, 45]" translate="[0,0,1000]" opacity="0.5" class="header"}}
-      <div><span>{{serial_name}}<small>{{serial_low_price}}万~{{serial_high_price}}万</small></span>
-      <a id="share" class="ico-share"><img src="/images/white_share.png"/></a>
+  {{#with car}}
+  <!-- header -->
+  <div id="header">
+    <span>{{serial_name}}
+      <small>{{serial_low_price}}万~{{serial_high_price}}万</small>
+    </span>
+    <a id="share" class="ico-share">
+      <img src="/images/white_share.png" />
+    </a>
+  </div>
+
+  <!-- images -->
+  <div style="position:relative;">
+    <div id="slider" class="owl-carousel owl-theme">
+      {{#each hd_pics}}
+      <div class="item image">
+        <img src="{{this}}" />
       </div>
-    {{/Surface}}
-
-
-    <!-- images -->
-    {{#ContainerSurface proportions="[1,0.5]" translate="[0,45,999]" overflow="hidden"}}
-    {{#Scrollview id="images" direction="X" paginated="true"}}
-      {{#famousEach hd_pics}}
-        {{#Surface}}
-          <div class="image" style="background-image: url({{this}})"></div>
-        {{/Surface}}
-      {{/famousEach}}
-    {{/Scrollview}}
-    {{/ContainerSurface}}
-
+      {{/each}}
+    </div>
     <!-- labels on the image-->
-    {{#Surface size="[true,true]" translate="[20,50,1000]" id="labels"}}
+    <div id="labels" class="animated fadeInUp">
       {{#each labels 5}}
-        <div class="label x{{labelLength this}}">{{cutLabel this}}</div>
+      <div class="label x{{labelLength this}}">{{cutLabel this}}</div>
       {{/each}}
-    {{/Surface}}
+    </div>
+  </div>
 
-    <!-- paginator dots -->
-    {{#Surface size="[100, 20]" align="[0.5,0.5]" origin="[0.5,0.5]" translate="[0, 35, 1000]"}}
-    <div id="paginator">
-    {{#each hd_pics}}
-    <span class="dot {{#if isCurrentIndex this}}active{{/if}}"></span>
+  <!-- labels inputs -->
+  <div class="m-l">
+    <i class="ico-eye"></i>
+    <span class="view-count">{{viewCount}}</span>
+  </div>
+  <div class="m-l m-t">
+    {{#each avatarNumbers}}
+    <span class="avatar">
+      <img src="/images/avatars/touxiang{{this}}.jpg" />
+    </span>
     {{/each}}
-    </div>
-    {{/Surface}}
-
-
-    <!-- labels inputs -->
-    {{#Scrollview direction="Y" paginated="false" proportions="[1,0.5]" align="[0,0.5]" translate="[0,45,998]"}}
-    {{#Surface size="[undefined, true]"}}
-    <div class="m-l m-t">
-      <i class="ico-eye"></i><span class="view-count">{{viewCount}}</span>
-    </div>
-    <div class="m-l m-t">
-      {{#each avatarNumbers}}
-      <span class="avatar"><img src="/images/avatars/touxiang{{this}}.jpg"/></span>
-      {{/each}}
-    </div>
-    {{/Surface}}
-    {{#Surface class="label-inputs" size="[undefined, true]"}}
-    <div class="label-container">
-      <h4 class="label-heading green">
+  </div>
+  <div id="label-inputs" class="label-container">
+    <h4 class="label-heading green">
       车主好评
-      </h4>
-      {{#each goodComments serial_id}}
-      <span class="label-text">#{{this}}</span><span class="label-number"></span>
-      {{/each}}
-      <h4 class="label-heading yellow">
+    </h4>
+    {{#each goodComments serial_id}}
+    <span class="label-text">#{{this}}</span>
+    <span class="label-number"></span>
+    {{/each}}
+    <h4 class="label-heading yellow">
       车主差评
-      </h4>
-      {{#each badComments serial_id}}
-      <span class="label-text">#{{this}}</span><span class="label-number"></span>
-      {{/each}}
-      <div id="footer">
-        <a href="http://mp.weixin.qq.com/s?__biz=MzAwNzE2MzA4Ng==&mid=204194013&idx=1&sn=0d8f1523b95afc5a46e071beeb80f06b#rd">关注公众号</a>
-      </div>
+    </h4>
+    {{#each badComments serial_id}}
+    <span class="label-text">#{{this}}</span>
+    <span class="label-number"></span>
+    {{/each}}
+    <div id="footer">
+      <a href="http://mp.weixin.qq.com/s?__biz=MzAwNzE2MzA4Ng==&mid=204194013&idx=1&sn=0d8f1523b95afc5a46e071beeb80f06b#rd">关注公众号</a>
     </div>
-    {{/Surface}}
-    {{#Surface size="[undefined, 60]"}}
-    {{/Surface}}
-    {{/Scrollview}}
+  </div>
 
-    <!-- share guide -->
-    {{#Surface id="guide" class="guide" opacity="0" translate="[0,0,0]"}}
-    <img src="/images/guide.png"/>
-    {{/Surface}}
+  <!-- share guide -->
+  <div id="guide" class="animated fadeInDown">
+    <img src="/images/guide.png" />
+  </div>
 
-    <!-- similars link icon -->
-    {{#Surface id="similars-link" size="[true, true]" align="[1,1]" origin="[1,1]" translate="[-130,-50,1000]"}}
-    <div>
-      <a href="/car/{{serial_id}}/similars">
-        <img src="/images/small-car-icon.png" />
-      </a>
-    </div>
-    {{/Surface}}
-    {{/with}}
-  {{/famousContext}}
+  <!-- similars link icon -->
+  <div id="similars-link" class="animated fadeInRight">
+    <img src="/images/small-car-icon.png" />
+  </div>
+  {{/with}}
 </template>

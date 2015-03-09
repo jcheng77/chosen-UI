@@ -21,3 +21,19 @@ Template.similars.helpers({
     }
   }
 });
+
+function handleBackClicked(e) {
+  Router.go('car.comments', {
+    serial_id: Session.get('serial_id')
+  });
+}
+
+function handleCarClicked(e) {
+  Router.go('car.comments', {
+    serial_id: this.serial_id
+  });
+}
+Template.similars.events({
+  'click .back-link': handleBackClicked,
+  'click .car-item': handleCarClicked
+});
