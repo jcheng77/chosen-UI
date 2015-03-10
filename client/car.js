@@ -35,15 +35,6 @@ Template.car.helpers({
     }
     return length;
   },
-  isCurrentIndex: function(imageUrl) {
-    var car = Car.findOne({
-      serial_id: Session.get('serial_id')
-    });
-    var imageIndex = car.hd_pics.indexOf(imageUrl)
-    var fview = FView.byId("images");
-    var current = fview.properties.get('index');
-    return current === imageIndex;
-  },
   avatarNumbers: function() {
     return gen3Numbers(11);
   },
@@ -74,31 +65,10 @@ function handleImageClicked(e, t) {
 
 function handleShareClicked(e, t) {
   t.$('#guide').show();
-
-  var car = Car.findOne({
-    serial_id: Session.get('serial_id')
-  });
-  var goodComments = car.good_comments.split('|');
-  if(goodComments && goodComments.length > 3) {
-    goodComments = goodComments.splice(0, 3);
-  }
-  wx.showOptionMenu();
-  wx.onMenuShareTimeline({
-    title: '我正在考虑选购' + car.serial_name + ',请身边高手点评一下吧',
-    link: Router.current().originalUrl,
-    imgUrl: car.hd_pics.length && car.hd_pics[0]
-  });
-  wx.onMenuShareAppMessage({
-    title: '我正在考虑选购' + car.serial_name + ',请身边高手点评一下吧',
-    desc: goodComments.join('; '),
-    link: Router.current().originalUrl,
-    imgUrl: car.hd_pics.length && car.hd_pics[0]
-  });
 }
 
 function handleGuideClicked(e, t) {
   t.$('#guide').hide();
-  wx && wx.hideOptionMenu();
 }
 
 function handleSimilarsClicked(e) {

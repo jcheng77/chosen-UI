@@ -9,7 +9,24 @@ var configWeixinJsApi = function() {
     if(config && wx) {
       wx.ready(function() {
         Session.set('wxJsApiReady', true);
-        wx.hideOptionMenu();
+        var car = Car.findOne({
+          serial_id: Session.get('serial_id')
+        });
+        var goodComments = car.good_comments.split('|');
+        if(goodComments && goodComments.length > 3) {
+          goodComments = goodComments.splice(0, 3);
+        }
+        wx.onMenuShareTimeline({
+          title: '我正在考虑选购' + car.serial_name + ',请身边高手点评一下吧',
+          link: Router.current().originalUrl,
+          imgUrl: car.hd_pics.length && car.hd_pics[0]
+        });
+        wx.onMenuShareAppMessage({
+          title: '我正在考虑选购' + car.serial_name + ',请身边高手点评一下吧',
+          desc: goodComments.join('; '),
+          link: Router.current().originalUrl,
+          imgUrl: car.hd_pics.length && car.hd_pics[0]
+        });
       });
       wx.error(function(res) {
         Session.set('wxJsApiReady', false);

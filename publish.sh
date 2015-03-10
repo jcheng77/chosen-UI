@@ -1,5 +1,5 @@
 demeteorizer -o ../build
-cp -Rf ../build/ ../auto2o_staging/
+cp -Rf ../build/* ../auto2o_staging/
 cd ../auto2o_staging
 
 svn revert programs/server/boot.js
