@@ -198,6 +198,7 @@ h4.label-heading {
   position: relative;
   font-size: 14px;
   font-weight: bold;
+  min-height: 200px;
 }
 .car-item .car-image .car-name {
   position: absolute;

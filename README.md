@@ -12,8 +12,10 @@ meteor
 ###publish?###
 
 ```
-git remote add dokku dokku@boluo.me:m
-git push dokku master
+#publish for staging testing
+./publish.sh
+#publish for production
+./publish_prod.sh
 ```
 
 

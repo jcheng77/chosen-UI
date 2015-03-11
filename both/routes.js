@@ -1,5 +1,8 @@
 var appId = 'wxcda8da689f673ea2';
 var configWeixinJsApi = function() {
+  if (!isWeixinClient()) {
+    return true;
+  }
   // 配置微信jSAPI
   var url = Router.current().originalUrl;
 
@@ -79,6 +82,20 @@ var configWeixinJsApi = function() {
   });
 };
 
+var authWithWechat = function() { //wechat oauth2 for mobile app pages
+  if (!Meteor.userId()) {
+    var that = this;
+    // if the user is not logged in, redirect to wechat oauth2 login
+    if (Accounts.loginServicesConfigured()) {
+      Meteor.loginWithWechat(function(error) {
+        that.next();
+      });
+    }
+  } else {
+    this.next();
+  }
+};
+
 var subs = new SubsManager();
 
 Router.configure({
@@ -96,7 +113,7 @@ Router.route('/car/:serial_id', {
     subs.subscribe('car', serial_id);
     subs.subscribe('view_count', serial_id);
   },
-  onRun: function() {
+  onAfterAction: function() {
     if(!Session.get("wxJsApiReady")) {
       configWeixinJsApi();
     }
@@ -117,7 +134,7 @@ Router.route('/car/:serial_id/similars', {
     subs.subscribe('car', serial_id);
     subs.subscribe('similar_cars', serial_id);
   },
-  onRun: function() {
+  onAfterAction: function() {
     configWeixinJsApi();
   },
   fastRender: true

@@ -26,9 +26,9 @@ reload
 autoupdate
 
 # Personal
-wechat:sign
 meteorhacks:fast-render
 meteorhacks:subs-manager
 iron:router
 natestrauser:animate-css
 richsilv:owl-carousel
+wechat:utils

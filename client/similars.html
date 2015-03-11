@@ -13,15 +13,23 @@
       <div class="car-comments">
         <p>
           <span class="label-heading green bold">优点:</span>
+          {{#if goodComments serial_id}}
           {{#each goodComments serial_id}}
           <span>{{this}};&nbsp;&nbsp;</span>
           {{/each}}
+          {{else}}
+          <span>暂无</span>
+          {{/if}}
         </p>
         <p>
           <span class="label-heading yellow bold">缺点:</span>
+          {{#if badComments serial_id}}
           {{#each badComments serial_id}}
           <span>{{this}};&nbsp;&nbsp;</span>
           {{/each}}
+          {{else}}
+          <span>暂无</span>
+          {{/if}}
         </p>
       </div>
     </div>

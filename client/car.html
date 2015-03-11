@@ -5,9 +5,11 @@
     <span>{{serial_name}}
       <small>{{serial_low_price}}万~{{serial_high_price}}万</small>
     </span>
+    {{#if jsApiReady}}
     <a id="share" class="ico-share">
       <img src="/images/white_share.png" />
     </a>
+    {{/if}}
   </div>
 
   <!-- images -->
@@ -43,17 +45,25 @@
     <h4 class="label-heading green">
       车主好评
     </h4>
+    {{#if goodComments serial_id}}
     {{#each goodComments serial_id}}
     <span class="label-text">#{{this}}</span>
     <span class="label-number"></span>
     {{/each}}
+    {{else}}
+    <span>暂无</span>
+    {{/if}}
     <h4 class="label-heading yellow">
       车主差评
     </h4>
+    {{#if badComments serial_id}}
     {{#each badComments serial_id}}
     <span class="label-text">#{{this}}</span>
     <span class="label-number"></span>
     {{/each}}
+    {{else}}
+    <span>暂无</span>
+    {{/if}}
     <div id="footer">
       <a href="http://mp.weixin.qq.com/s?__biz=MzAwNzE2MzA4Ng==&mid=205812187&idx=1&sn=0d2921e3474548dfe4f1226d47522682#rd">关注公众号</a>
     </div>

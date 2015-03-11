@@ -10,3 +10,13 @@ Template.registerHelper('badComments', function(serialId) {
   });
   return car.bad_comments ? car.bad_comments.split('|') : [];
 });
+
+isWeixinClient = function isWeixinClient() { 
+  var ua = window.navigator.userAgent.toLowerCase();
+  if(ua.match(/MicroMessenger/i) == 'micromessenger'){ 
+    return true; 
+  }else{ 
+    return false; 
+  } 
+};
+Template.registerHelper('isWeixinClient', isWeixinClient);
