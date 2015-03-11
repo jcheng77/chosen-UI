@@ -90,4 +90,5 @@ Template.car.rendered = function() {
     paginationSpeed: 400,
     items: 1
   });
+  $ && $(window).scrollTop(0);
 };

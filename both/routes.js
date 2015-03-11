@@ -1,9 +1,11 @@
 var appId = 'wxcda8da689f673ea2';
+var wxConfiguring = false;
 var configWeixinJsApi = function() {
-  if (!isWeixinClient()) {
+  if (!isWeixinClient() || wxConfiguring) {
     return true;
   }
   // 配置微信jSAPI
+  var wxConfiguring = true;
   var url = Router.current().originalUrl;
 
   // 避免router切换时候重复配置
@@ -11,6 +13,7 @@ var configWeixinJsApi = function() {
   Meteor.call('getJsApiSignature', url, function(error, config) {
     if(config && wx) {
       wx.ready(function() {
+        wxConfiguring = false;
         Session.set('wxJsApiReady', true);
         var car = Car.findOne({
           serial_id: Session.get('serial_id')
@@ -115,14 +118,13 @@ Router.route('/car/:serial_id', {
     subs.subscribe('car', serial_id);
     subs.subscribe('view_count', serial_id);
   },
-  onBeforeAction: authWithWechat,
+  // onBeforeAction: authWithWechat,
   onAfterAction: function() {
-    if(!Session.get("wxJsApiReady")) {
-      configWeixinJsApi();
-    }
-    var serial_id = Session.get('serial_id');
-    Meteor.call('increaseViewCount', serial_id);
+    configWeixinJsApi();
+
     if (Meteor.userId()) {
+      var serial_id = Session.get('serial_id');
+      Meteor.call('increaseViewCount', serial_id);
       Meteor.call('addInterestCar', serial_id);
     }
   },
@@ -139,9 +141,6 @@ Router.route('/car/:serial_id/similars', {
     }
     subs.subscribe('car', serial_id);
     subs.subscribe('similar_cars', serial_id);
-  },
-  onAfterAction: function() {
-    configWeixinJsApi();
   },
   fastRender: true
 });

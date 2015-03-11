@@ -84,9 +84,9 @@ Meteor.methods({
     ViewCount.upsert({serial_id: serial_id}, {$inc: {count: 1}, $set: {serial_id: serial_id}});
   },
   addInterestCar: function(serial_id) {
-    if (this.userId()) {
+    if (this.userId) {
       this.unblock();
-      var openid = this.user().username;
+      var openid = Meteor.user().username;
       Interest.upsert({openid: openid}, {$push: {interests: serial_id}});
     }
   }
