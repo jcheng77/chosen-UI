@@ -118,13 +118,19 @@ Router.route('/car/:serial_id', {
     subs.subscribe('car', serial_id);
     subs.subscribe('view_count', serial_id);
   },
-  // onBeforeAction: authWithWechat,
+  onBeforeAction: function() {
+    var serial_id = Session.get('serial_id');
+    Meteor.call('increaseViewCount', serial_id);
+    if (isWeixinClient()) {
+      authWithWechat();
+    } else {
+      this.next();
+    }
+  },
   onAfterAction: function() {
-    configWeixinJsApi();
-
     if (Meteor.userId()) {
+      configWeixinJsApi();
       var serial_id = Session.get('serial_id');
-      Meteor.call('increaseViewCount', serial_id);
       Meteor.call('addInterestCar', serial_id);
     }
   },
