@@ -102,16 +102,26 @@ function getIdentity(tokenResponse) {
 
 OAuth.registerService('wechat', 2, null, function(query) {
   var tokenResponse = getAuthToken(query.code);
-  var identity = getIdentity(tokenResponse);
-  return {
-    serviceData: {
-      id: identity.openid,
-      username: identity.openid
-    },
-    options: {
-      profile: identity
-    }
-  };
+  var openId = tokenResponse.openid;
+  if (query.requestUserInfo === 'true') {
+    var identity = getIdentity(tokenResponse);
+    return {
+      serviceData: {
+        id: identity.openid,
+        username: identity.openid
+      },
+      options: {
+        profile: identity
+      }
+    };
+  } else {
+    return {
+      serviceData: {
+        id: openId,
+        username: openId
+      }
+    };
+  }
 });
 
 

@@ -24,11 +24,14 @@ Wechat.requestCredential = function(options, credentialRequestCompleteCallback) 
 
   // var credentialToken = Random.secret();
   var credentialToken = '1';
+  var scope = options.requestUserInfo ? 'snsapi_userinfo' : 'snsapi_base';
 
   var loginUrl =
     'https://open.weixin.qq.com/connect/oauth2/authorize' + '?appid=' + config.appId +
-    '&redirect_uri=' + OAuth._redirectUri('wechat', config) +
-    '&response_type=code&scope=snsapi_userinfo' +
+    '&redirect_uri=' + OAuth._redirectUri('wechat', config, {
+      requestUserInfo: options.requestUserInfo
+    }) +
+    '&response_type=code&scope=' + scope +
     '&state=' + OAuth._stateParam(config.loginStyle, credentialToken) +
     // '&state=1111' +
     '#wechat_redirect';

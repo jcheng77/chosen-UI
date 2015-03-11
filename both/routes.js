@@ -87,7 +87,9 @@ var authWithWechat = function() { //wechat oauth2 for mobile app pages
     var that = this;
     // if the user is not logged in, redirect to wechat oauth2 login
     if (Accounts.loginServicesConfigured()) {
-      Meteor.loginWithWechat(function(error) {
+      Meteor.loginWithWechat({
+          requestUserInfo: false
+        }, function(error) {
         that.next();
       });
     }
@@ -113,12 +115,16 @@ Router.route('/car/:serial_id', {
     subs.subscribe('car', serial_id);
     subs.subscribe('view_count', serial_id);
   },
+  onBeforeAction: authWithWechat,
   onAfterAction: function() {
     if(!Session.get("wxJsApiReady")) {
       configWeixinJsApi();
     }
     var serial_id = Session.get('serial_id');
     Meteor.call('increaseViewCount', serial_id);
+    if (Meteor.userId()) {
+      Meteor.call('addInterestCar', serial_id);
+    }
   },
   fastRender: true
 });
