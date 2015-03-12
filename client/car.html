@@ -45,8 +45,8 @@
     <h4 class="label-heading green">
       车主好评
     </h4>
-    {{#if goodComments serial_id}}
-    {{#each goodComments serial_id}}
+    {{#if goodComments}}
+    {{#each goodComments}}
     <span class="label-text">#{{this}}</span>
     <span class="label-number"></span>
     {{/each}}
@@ -56,8 +56,8 @@
     <h4 class="label-heading yellow">
       车主差评
     </h4>
-    {{#if badComments serial_id}}
-    {{#each badComments serial_id}}
+    {{#if badComments}}
+    {{#each badComments}}
     <span class="label-text">#{{this}}</span>
     <span class="label-number"></span>
     {{/each}}
@@ -76,7 +76,7 @@
 
   <!-- similars link icon -->
   <div id="similars-link" class="animated fadeInRight">
-    <img src="/images/guessbutton.png" />
+    <span>相似车型</span>
   </div>
   {{/with}}
 </template>

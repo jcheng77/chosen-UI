@@ -1,5 +1,5 @@
 Template.recommends.helpers({
   recommends: function() {
-    return Car.find();
+    return Session.get('recommends') || [];
   }
 });

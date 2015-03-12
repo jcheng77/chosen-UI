@@ -175,14 +175,12 @@ Router.route('/tops', {
 Router.route('/recommends', {
   template: 'recommends',
   name: 'car.recommends',
-  waitOn: function() {
-    subs.subscribe('recommends');
-  },
   action: function() {
-    if(Meteor.user() && Car.findOne()) {
-      this.render();
-    } else {
-      this.redirect('car.tops');
-    }
+    Meteor.call('recommend', false /*debugMode*/, function(error, result) {
+      if (result && result.length) {
+        Session.set('recommends', result);
+      }
+    });
+    this.render();
   }
 });

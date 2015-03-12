@@ -65,29 +65,3 @@ Meteor.publish('top_cars', function() {
     }
   });
 });
-
-Meteor.publish('recommends', function(debug) {
-  var interests = [];
-  if(this.userId) {
-    var openid = Meteor.user().services.wechat ? Meteor.user().services.wechat.id : null;
-    var log = Interest.findOne({
-      openid: openid
-    });
-    if(log) {
-      interests = log.interests;
-    }
-  } else if(debug) {
-    interests = [218];
-  }
-  //浏览过的车型，或者相似车型里包含有浏览过的车型
-  var cars = Car.find({
-    serial_id: {
-      $in: interests
-    }
-  }, {
-    limit: 10
-  });
-  console.log(interests)
-  console.log(cars.fetch())
-  return cars;
-});

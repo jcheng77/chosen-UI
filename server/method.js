@@ -5,7 +5,7 @@ var appId = 'wxcda8da689f673ea2';
 var appSecret = '0c5cafed0f4c8e04b5dafe310d0df9b2';
 
 var isTokenExpired = function(token) {
-  if (!token) {
+  if(!token) {
     return true;
   }
   var timeSinceCreated = (new Date().getTime() - token.createdDate.getTime()) / 1000;
@@ -15,15 +15,15 @@ var isTokenExpired = function(token) {
 Meteor.methods({
   getAccessToken: function() {
     var accessToken = AccessToken.findOne({
-        appId: appId
-      });
+      appId: appId
+    });
 
-    if (isTokenExpired(accessToken)) {
+    if(isTokenExpired(accessToken)) {
       var tokenRes = HTTP.post("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + appId + "&secret=" + appSecret);
-      if (tokenRes.statusCode === 200) {
+      if(tokenRes.statusCode === 200) {
         console.log(tokenRes);
         var token = tokenRes.data["access_token"];
-        if (token) {
+        if(token) {
           accessToken = {
             appId: appId,
             token: token,
@@ -45,20 +45,22 @@ Meteor.methods({
     return accessToken;
   },
   getJsApiTicket: function() {
-    var jsApiTicket = JsApiTicket.findOne({appId: appId});
-    if (isTokenExpired(jsApiTicket)) {
+    var jsApiTicket = JsApiTicket.findOne({
+      appId: appId
+    });
+    if(isTokenExpired(jsApiTicket)) {
       var accessToken = Meteor.call('getAccessToken');
-      if (accessToken) {
+      if(accessToken) {
         var ticketRes = HTTP.get("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=" + accessToken.token + "&type=jsapi");
-        if (ticketRes.statusCode === 200) {
+        if(ticketRes.statusCode === 200) {
           console.log("METHOD:getJsApiTicket:ticketRes", ticketRes);
           var ticket = ticketRes.data["ticket"];
-          if (ticket) {
+          if(ticket) {
             jsApiTicket = {
               appId: appId,
               ticket: ticket,
               expiresIn: ticketRes.data["expires_in"],
-               createdDate: new Date()
+              createdDate: new Date()
             };
             // TODO - make upsert defer
             JsApiTicket.upsert({
@@ -81,13 +83,69 @@ Meteor.methods({
   },
   increaseViewCount: function(serial_id) {
     this.unblock();
-    ViewCount.upsert({serial_id: serial_id}, {$inc: {count: 1}, $set: {serial_id: serial_id}});
+    ViewCount.upsert({
+      serial_id: serial_id
+    }, {
+      $inc: {
+        count: 1
+      },
+      $set: {
+        serial_id: serial_id
+      }
+    });
   },
   addInterestCar: function(serial_id) {
-    if (this.userId) {
+    if(this.userId) {
       this.unblock();
-      var openid = Meteor.user().services.wechat? Meteor.user().services.wechat.id: null;
-      Interest.upsert({openid: openid}, {$addToSet: {interests: serial_id}});
+      var openid = Meteor.user().services.wechat ? Meteor.user().services.wechat.id : null;
+      Interest.upsert({
+        openid: openid
+      }, {
+        $addToSet: {
+          interests: serial_id
+        }
+      });
     }
+  },
+  recommend: function(debugMode) {
+    var interests = [];
+    if(this.userId) {
+      var user = Meteor.users.findOne(this.userId);
+      var openid = user.services.wechat ? user.services.wechat.id : null;
+      var log = Interest.findOne({
+        openid: openid
+      });
+      if(log) {
+        interests = log.interests;
+      }
+    } else if(debugMode) {
+      interests = [218];
+    } else {
+      //如果还没浏览过，则返回系统中的热门车型
+      var topIds = ViewCount.find({}, {
+        limit: 10,
+        sort: {
+          count: -1
+        }
+      }).map(function(view) {
+        return view.serial_id;
+      });
+
+      return Car.find({
+        serial_id: {
+          $in: topIds
+        }
+      }).fetch();
+    }
+    //浏览过的车型，或者相似车型里包含有浏览过的车型(TODO)
+    var cars = Car.find({
+      serial_id: {
+        $in: interests
+      }
+    }, {
+      limit: 10
+    });
+    console.log(interests)
+    return cars.fetch();
   }
 });
