@@ -8,8 +8,6 @@ var configWeixinJsApi = function() {
   var wxConfiguring = true;
   var url = Router.current().originalUrl;
 
-  // 避免router切换时候重复配置
-  Session.set('wxJsApiConfigured', true);
   Meteor.call('getJsApiSignature', url, function(error, config) {
     if(config && wx) {
       wx.ready(function() {
@@ -85,27 +83,42 @@ var configWeixinJsApi = function() {
   });
 };
 
-var authWithWechat = function() { //wechat oauth2 for mobile app pages
-  if (!Meteor.userId()) {
-    var that = this;
+function authWithWechatBeforeAction (callback) { //wechat oauth2 for mobile app pages
+  if (isWeixinClient() && !Meteor.userId()) {
     // if the user is not logged in, redirect to wechat oauth2 login
     if (Accounts.loginServicesConfigured()) {
+      alert(1)
       Meteor.loginWithWechat({
           requestUserInfo: false
         }, function(error) {
-        that.next();
+          alert(2)
+        callback && callback();
       });
     }
   } else {
-    this.next();
+    callback && callback();
   }
 };
+
+function increateViewCountOnRun() {
+  Meteor.call('increaseViewCount', Session.get('serial_id'));
+}
+
+function configWeixinAndAddInterest() {
+  configWeixinJsApi();
+  if (Meteor.userId()) {
+    Meteor.call('addInterestCar', serial_id);
+  }
+}
 
 var subs = new SubsManager();
 
 Router.configure({
   layoutTemplate: 'layout'
 });
+// Router.onBeforeAction(authWithWechatBeforeAction, {only: 'car.comments'});
+// Router.onRun(increateViewCountOnRun, {only: ['car.comments']});
+// Router.onRun(configWeixinAndAddInterest, {only: ['car.comments']});
 
 Router.route('/car/:serial_id', {
   template: 'car',
@@ -118,23 +131,15 @@ Router.route('/car/:serial_id', {
     subs.subscribe('car', serial_id);
     subs.subscribe('view_count', serial_id);
   },
-  onBeforeAction: function() {
-    var serial_id = Session.get('serial_id');
-    Meteor.call('increaseViewCount', serial_id);
-    if (isWeixinClient()) {
-      authWithWechat();
-    } else {
-      this.next();
-    }
-  },
-  onAfterAction: function() {
-    if (Meteor.userId()) {
-      configWeixinJsApi();
-      var serial_id = Session.get('serial_id');
-      Meteor.call('addInterestCar', serial_id);
-    }
-  },
-  fastRender: true
+  fastRender: true,
+  action: function() {
+    var that = this;
+    increateViewCountOnRun();
+    configWeixinAndAddInterest();
+    authWithWechatBeforeAction(function() {
+      that.render();
+    });
+  }
 });
 
 Router.route('/car/:serial_id/similars', {
