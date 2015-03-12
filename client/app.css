@@ -180,7 +180,7 @@ h4.label-heading {
 }
 /* similar cars */
 
-#similars-header {
+.view-header {
   text-align: center;
 }
 .car-item {

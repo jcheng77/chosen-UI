@@ -1,38 +1,6 @@
 <template name="similars">
-  <div id="main">
-    <div id="similars-header">
-      <h4>猜你喜欢</h4>
-    </div>
-    {{#each similarCars}}
-    <div class="car-item animated fadeInRight">
-      <div class="car-image">
-        <img src="{{thumbImageUrl}}" />
-        <span class="car-name">{{serial_name}}</span>
-        <span class="car-price">{{serial_low_price}}万-{{serial_high_price}}万</span>
-      </div>
-      <div class="car-comments">
-        <p>
-          <span class="label-heading green bold">优点:</span>
-          {{#if goodComments serial_id}}
-          {{#each goodComments serial_id}}
-          <span>{{this}};&nbsp;&nbsp;</span>
-          {{/each}}
-          {{else}}
-          <span>暂无</span>
-          {{/if}}
-        </p>
-        <p>
-          <span class="label-heading yellow bold">缺点:</span>
-          {{#if badComments serial_id}}
-          {{#each badComments serial_id}}
-          <span>{{this}};&nbsp;&nbsp;</span>
-          {{/each}}
-          {{else}}
-          <span>暂无</span>
-          {{/if}}
-        </p>
-      </div>
-    </div>
-    {{/each}}
+  <div class="view-header">
+    <h4>相似车型</h4>
   </div>
+  {{#each similarCars}} {{>car_item}} {{/each}}
 </template>

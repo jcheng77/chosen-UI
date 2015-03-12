@@ -7,7 +7,7 @@ var configWeixinJsApiOnRun = function() {
   // 配置微信jSAPI
   var url = Router.current().originalUrl;
   // work around iron router bug - on second run, the url is relative
-  if (url.indexOf('http') < 0) {
+  if(url.indexOf('http') < 0) {
     url = __meteor_runtime_config__.ROOT_URL + url.substring(1, url.length);
   }
   var serial_id = parseInt(this.params.serial_id, 10);
@@ -108,7 +108,7 @@ function increateViewCountOnRun() {
 }
 
 function addInterestOnRun() {
-  if (isWeixinClient()) {
+  if(isWeixinClient()) {
     Meteor.call('addInterestCar', parseInt(this.params.serial_id, 10));
   }
   this.next();
@@ -120,12 +120,19 @@ Router.configure({
   layoutTemplate: 'layout'
 });
 
-Router.onRun(increateViewCountOnRun, {only: ['car.comments']});
-Router.onRun(addInterestOnRun, {only: ['car.comments']});
-Router.onRun(configWeixinJsApiOnRun, {only: ['car.comments']});
+Router.onRun(increateViewCountOnRun, {
+  only: ['car.comments']
+});
+Router.onRun(addInterestOnRun, {
+  only: ['car.comments']
+});
+Router.onRun(configWeixinJsApiOnRun, {
+  only: ['car.comments']
+});
 
-Router.onBeforeAction(authWithWechatBeforeAction, {only: 'car.comments'});
-
+Router.onBeforeAction(authWithWechatBeforeAction, {
+  only: ['car.comments', 'car.recommends']
+});
 
 Router.route('/car/:serial_id', {
   template: 'car',
@@ -153,4 +160,29 @@ Router.route('/car/:serial_id/similars', {
     subs.subscribe('similar_cars', serial_id);
   },
   fastRender: true
+});
+
+Router.route('/tops', {
+  template: 'tops',
+  name: 'car.tops',
+  waitOn: function() {
+    subs.subscribe('top_cars');
+    subs.subscribe('top_views');
+  },
+  fastRender: true
+});
+
+Router.route('/recommends', {
+  template: 'recommends',
+  name: 'car.recommends',
+  waitOn: function() {
+    subs.subscribe('recommends');
+  },
+  action: function() {
+    if(Meteor.user() && Car.findOne()) {
+      this.render();
+    } else {
+      this.redirect('car.tops');
+    }
+  }
 });

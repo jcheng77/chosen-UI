@@ -19,29 +19,5 @@ Template.similars.helpers({
     } else {
       return [];
     }
-  },
-  thumbImageUrl: function() {
-    var car = this;
-    if (car.hd_pics && car.hd_pics.length) {
-      return car.hd_pics[0];
-    } else {
-      return "";
-    }
   }
-});
-
-function handleBackClicked(e) {
-  Router.go('car.comments', {
-    serial_id: Session.get('serial_id')
-  });
-}
-
-function handleCarClicked(e) {
-  Router.go('car.comments', {
-    serial_id: this.serial_id
-  });
-}
-Template.similars.events({
-  'click .back-link': handleBackClicked,
-  'click .car-item': handleCarClicked
 });
