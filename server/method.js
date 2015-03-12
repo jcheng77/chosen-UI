@@ -86,8 +86,8 @@ Meteor.methods({
   addInterestCar: function(serial_id) {
     if (this.userId) {
       this.unblock();
-      var openid = Meteor.user().username;
-      Interest.upsert({openid: openid}, {$push: {interests: serial_id}});
+      var openid = Meteor.user().services.wechat? Meteor.user().services.wechat.id: null;
+      Interest.upsert({openid: openid}, {$addToSet: {interests: serial_id}});
     }
   }
 });

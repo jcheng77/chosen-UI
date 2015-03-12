@@ -1,36 +1,37 @@
 var appId = 'wxcda8da689f673ea2';
-var wxConfiguring = false;
-var configWeixinJsApi = function() {
-  if (!isWeixinClient() || wxConfiguring) {
-    return true;
+
+var configWeixinJsApiOnRun = function() {
+  if(!isWeixinClient()) {
+    return this.next();
   }
   // 配置微信jSAPI
-  var wxConfiguring = true;
   var url = Router.current().originalUrl;
+  // work around iron router bug - on second run, the url is relative
+  if (url.indexOf('http') < 0) {
+    url = __meteor_runtime_config__.ROOT_URL + url.substring(1, url.length);
+  }
+  var serial_id = parseInt(this.params.serial_id, 10);
 
   Meteor.call('getJsApiSignature', url, function(error, config) {
     if(config && wx) {
       wx.ready(function() {
-        wxConfiguring = false;
         Session.set('wxJsApiReady', true);
         var car = Car.findOne({
-          serial_id: Session.get('serial_id')
+          serial_id: serial_id
         });
-        var goodComments = car.good_comments.split('|');
+        var goodComments = car.good_comments && car.good_comments.split('|');
         if(goodComments && goodComments.length > 3) {
           goodComments = goodComments.splice(0, 3);
         }
-        wx.onMenuShareTimeline({
-          title: '我正在考虑选购' + car.serial_name + ',请身边高手点评一下吧',
-          link: Router.current().originalUrl,
-          imgUrl: car.hd_pics.length && car.hd_pics[0]
-        });
-        wx.onMenuShareAppMessage({
+        var message = {
           title: '我正在考虑选购' + car.serial_name + ',请身边高手点评一下吧',
           desc: goodComments.join('; '),
-          link: Router.current().originalUrl,
+          link: url,
           imgUrl: car.hd_pics.length && car.hd_pics[0]
-        });
+        };
+        // alert(JSON.stringify(message));
+        wx.onMenuShareTimeline(message);
+        wx.onMenuShareAppMessage(message);
       });
       wx.error(function(res) {
         Session.set('wxJsApiReady', false);
@@ -80,35 +81,37 @@ var configWeixinJsApi = function() {
         ]
       });
     }
+    this.next();
   });
 };
 
-function authWithWechatBeforeAction (callback) { //wechat oauth2 for mobile app pages
-  if (isWeixinClient() && !Meteor.userId()) {
+function authWithWechatBeforeAction() { //wechat oauth2 for mobile app pages
+  var debug = (this.params.query.debug === 'true');
+  if(!debug && isWeixinClient() && !Meteor.userId()) {
+    // if (true) {
     // if the user is not logged in, redirect to wechat oauth2 login
-    if (Accounts.loginServicesConfigured()) {
-      alert(1)
+    if(Accounts.loginServicesConfigured()) {
       Meteor.loginWithWechat({
-          requestUserInfo: false
-        }, function(error) {
-          alert(2)
-        callback && callback();
+        requestUserInfo: false
+      }, function(error) {
+        // do nothing
       });
     }
   } else {
-    callback && callback();
+    this.next();
   }
 };
 
 function increateViewCountOnRun() {
-  Meteor.call('increaseViewCount', Session.get('serial_id'));
+  Meteor.call('increaseViewCount', parseInt(this.params.serial_id, 10));
+  this.next();
 }
 
-function configWeixinAndAddInterest() {
-  configWeixinJsApi();
-  if (Meteor.userId()) {
-    Meteor.call('addInterestCar', serial_id);
+function addInterestOnRun() {
+  if (isWeixinClient()) {
+    Meteor.call('addInterestCar', parseInt(this.params.serial_id, 10));
   }
+  this.next();
 }
 
 var subs = new SubsManager();
@@ -116,9 +119,13 @@ var subs = new SubsManager();
 Router.configure({
   layoutTemplate: 'layout'
 });
-// Router.onBeforeAction(authWithWechatBeforeAction, {only: 'car.comments'});
-// Router.onRun(increateViewCountOnRun, {only: ['car.comments']});
-// Router.onRun(configWeixinAndAddInterest, {only: ['car.comments']});
+
+Router.onRun(increateViewCountOnRun, {only: ['car.comments']});
+Router.onRun(addInterestOnRun, {only: ['car.comments']});
+Router.onRun(configWeixinJsApiOnRun, {only: ['car.comments']});
+
+Router.onBeforeAction(authWithWechatBeforeAction, {only: 'car.comments'});
+
 
 Router.route('/car/:serial_id', {
   template: 'car',
@@ -131,15 +138,7 @@ Router.route('/car/:serial_id', {
     subs.subscribe('car', serial_id);
     subs.subscribe('view_count', serial_id);
   },
-  fastRender: true,
-  action: function() {
-    var that = this;
-    increateViewCountOnRun();
-    configWeixinAndAddInterest();
-    authWithWechatBeforeAction(function() {
-      that.render();
-    });
-  }
+  fastRender: true
 });
 
 Router.route('/car/:serial_id/similars', {
