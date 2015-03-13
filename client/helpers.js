@@ -6,6 +6,10 @@ Template.registerHelper('badComments', function() {
   var car = this;
   return car.bad_comments ? car.bad_comments.split('|') : [];
 });
+Template.registerHelper('notBadData', function() {
+  var car = this;
+  return car.hd_pics && car.hd_pics.length && car.good_comments;
+});
 
 isWeixinClient = function isWeixinClient() {
   var ua = window.navigator.userAgent.toLowerCase();

@@ -1,4 +1,5 @@
 <template name="car_item">
+  {{#if notBadData}}
   <div class="car-item animated fadeInRight">
     <div class="car-image">
       <a href="{{pathFor 'car.comments'}}"><img src="{{thumbImageUrl}}" /></a>
@@ -24,4 +25,5 @@
       </p>
     </div>
   </div>
+  {{/if}}
 </template>

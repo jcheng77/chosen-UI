@@ -3,21 +3,10 @@ Template.similars.helpers({
     return Session.get('serial_id');
   },
   similarCars: function() {
-    var serialId = Session.get('serial_id');
-    var car = Car.findOne({
-      serial_id: serialId
+    var serialId = Session.get('serial_id');// current car
+    // all publish cars except for current should be the similar ones, check out publish function in server side
+    return Car.find({
+      serial_id: {$ne : serialId}
     });
-    var similar_ids = _(car.serial_competion || []).map(function(comp) {
-      return parseInt(comp.serial_id, 10);
-    });
-    if(car) {
-      return Car.find({
-        serial_id: {
-          $in: similar_ids
-        }
-      });
-    } else {
-      return [];
-    }
   }
 });

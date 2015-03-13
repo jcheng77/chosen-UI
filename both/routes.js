@@ -117,7 +117,8 @@ function addInterestOnRun() {
 var subs = new SubsManager();
 
 Router.configure({
-  layoutTemplate: 'layout'
+  layoutTemplate: 'layout',
+  loadingTemplate: 'loading'
 });
 
 Router.onRun(increateViewCountOnRun, {
@@ -142,8 +143,7 @@ Router.route('/car/:serial_id', {
     if(Meteor.isClient) {
       Session.set('serial_id', serial_id);
     }
-    subs.subscribe('car', serial_id);
-    subs.subscribe('view_count', serial_id);
+    return [subs.subscribe('car', serial_id), subs.subscribe('view_count', serial_id)];
   },
   fastRender: true
 });
@@ -156,8 +156,7 @@ Router.route('/car/:serial_id/similars', {
     if(Meteor.isClient) {
       Session.set('serial_id', serial_id);
     }
-    subs.subscribe('car', serial_id);
-    subs.subscribe('similar_cars', serial_id);
+    return [subs.subscribe('car', serial_id), subs.subscribe('similar_cars', serial_id)];
   },
   fastRender: true
 });
@@ -166,8 +165,7 @@ Router.route('/tops', {
   template: 'tops',
   name: 'car.tops',
   waitOn: function() {
-    subs.subscribe('top_cars');
-    subs.subscribe('top_views');
+    return [subs.subscribe('top_cars'), subs.subscribe('top_views')];
   },
   fastRender: true
 });
@@ -176,11 +174,13 @@ Router.route('/recommends', {
   template: 'recommends',
   name: 'car.recommends',
   action: function() {
+    var that = this;
     Meteor.call('recommend', false /*debugMode*/, function(error, result) {
       if (result && result.length) {
         Session.set('recommends', result);
       }
+      that.render();
     });
-    this.render();
+    this.render('loading');
   }
 });

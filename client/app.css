@@ -250,3 +250,9 @@ h4.label-heading {
   height: 5px;
   margin: 2px;
 }
+
+.loading {
+  font-size: 13px;
+  text-align: center;
+  margin-top: 10px;
+}
