@@ -227,11 +227,12 @@ h4.label-heading {
 }
 #similars-link {
   cursor: pointer;
-  position: fixed;
-  bottom: 10px;
+  position: absolute;
+  bottom: -10px;
   right: 10px;
   width: 80px;
   height: 20px;
+  z-index: 100;
 }
 #similars-link span {
   font-size: 12px;
