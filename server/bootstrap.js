@@ -22,13 +22,20 @@ Meteor.startup(function() {
       });
       if (matchedId) {
         var sid = parseInt(matchedId.tSId, 10);
+        var con = _(koubei.koubei_con).map(function(item) {
+          return {
+            rank: parseFloat(item.rank.substring(0, 5), 10),
+            title: item.title.substring(0, item.title.length -1)
+          }
+        });
+        var score = parseInt(koubei.font_score, 10);
         AutoCon.upsert({
           serial_id: sid
         }, {
           serial_id: sid,
-          con: koubei.koubei_con,
-          rival: koubei.koubei_rival,
-          font_score: koubei.font_score
+          name: koubei.name,
+          con: con,
+          font_score: score
         });
       }
     });
