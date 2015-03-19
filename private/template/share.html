@@ -1,0 +1,70 @@
+<html>
+{{>head}}
+<body>
+<div class="rich_media">
+  <div class="rich_media_inner">
+    <div id="page-content">
+      <div id="img-content" align="center">
+        <img src="/images/y.png">
+      </div>
+
+      <h2 class="rich_media_title" id="activity-name">
+      <p style="font-size:13px;border:1px dashed #CF1585;display:block;margin-top:10px;text-align:center;padding:5px">
+        <img style="vertical-align:middle;" src="http://fzh2014.duapp.com/uploadimages/ddz/lock.jpg">答案已被隐藏，将在<a onclick="javascript:document.getElementById('share-wx').style.display='block'" style="text-decoration: underline" id="click_share">分享到朋友圈后</a>自动显示!
+      </p>
+      <p style="dashed #CF1585;display:block;margin-top:100%px;text-align:center;padding:100%px">
+       <a onclick="javascript:document.getElementById('share-wx').style.display='block'" style="text-decoration: underline" id="click_share">→点击这里分享←</a>
+      </p>
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div id="share-wx" onclick="javascript:this.style.display='none'" style="display: none;">  <p style="text-align: right; padding-left: 10px;color:#fff;font-size:16px">
+    分享后将揭晓答案<img src="/images/arron.png" id="share-wx-img" style="max-width: 280px; padding-right: 25px;">
+  </p>
+</div>
+
+<script>
+var config = {{wxConfig}};
+wx.ready(function() {
+  var message = {
+    title: '9个人在电梯里你是第十个（据说正常人群，答对这道题只有万分之一！）',
+    desc: '9个人在电梯里你是第十个（据说正常人群，答对这道题只有万分之一！）',
+    link: '{{{originUrl}}}',
+    imgUrl: 'http://mmbiz.qpic.cn/mmbiz/5eN85zwPYxouYZzoOwiaakI5A1T1JHm0pbdHDwytf77prKaEXI3Yia2XLcSGOCibazQ4UrWcZbd75A5fQPKadwu2A/640?tp=webp&wxfrom=5',
+    success: function () {
+      // 用户确认分享后执行的回调函数
+      location.href='{{{doneUrl}}}';
+    }
+  };
+  wx.onMenuShareTimeline(message);
+  wx.onMenuShareAppMessage(message);
+});
+wx.config({
+  debug: false,
+  appId: 'wxcda8da689f673ea2', // 必填，公众号的唯一标识
+  timestamp: config.timestamp, // 必填，生成签名的时间戳
+  nonceStr: config.nonceStr, // 必填，生成签名的随机串
+  signature: config.signature, // 必填，签名，见附录1
+  jsApiList: [
+    'onMenuShareTimeline',
+    'onMenuShareAppMessage'
+  ]
+});
+</script>
+<style type="text/css">
+  #share-wx {
+    background: rgba(0,0,0,0.8);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    display: none;
+  }
+</style>
+</body>
+
+</html>

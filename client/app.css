@@ -5,13 +5,16 @@ body {
   margin: 0;
   background-color: white;
 }
+
 small {
   font-size: 12px;
   padding-left: 10px;
 }
+
 #main {
   position: relative;
 }
+
 @media screen and (min-width: 600px) {
   #main {
     width: 600px;
@@ -21,6 +24,7 @@ small {
     text-align: center;
   }
 }
+
 #header {
   color: white;
   line-height: 45px;
@@ -30,21 +34,25 @@ small {
   text-shadow: 0 2px 2px #222;
   background-color: rgba(34, 34, 34, 0.5);
 }
+
 #slider {
   position: relative;
   min-height: 200px;
 }
+
 #slider .item img {
   display: block;
   width: 100%;
   height: auto;
 }
+
 #labels {
   position: absolute;
   top: 20px;
   left: 10px;
   z-index: 100;
 }
+
 .label {
   height: 25px;
   line-height: 25px;
@@ -57,38 +65,47 @@ small {
   background-position: left center;
   background-repeat: no-repeat;
 }
+
 .label.x4 {
   width: 65px;
   background-image: url('/images/labels/label-4.png');
 }
+
 .label.x5 {
   width: 75px;
   background-image: url('/images/labels/label-5.png');
 }
+
 .label.x6 {
   width: 85px;
   background-image: url('/images/labels/label-6.png');
 }
+
 .label.x7 {
   width: 100px;
   background-image: url('/images/labels/label-7.png');
 }
+
 .label.x8 {
   width: 115px;
   background-image: url('/images/labels/label-8.png');
 }
+
 .label.x9 {
   width: 125px;
   background-image: url('/images/labels/label-9.png');
 }
+
 .label.x10 {
   width: 135px;
   background-image: url('/images/labels/label-10.png');
 }
+
 .label.x11 {
   width: 150px;
   background-image: url('/images/labels/label-11.png');
 }
+
 #label-inputs {
   background-color: white;
   font-size: 13px;
@@ -96,65 +113,81 @@ small {
   padding: 10px;
   line-height: 25px;
 }
+
 .avatar {
   display: inline-block;
   width: 35px;
   height: 35px;
 }
+
 .avatar img {
   width: 100%;
   height: 100%;
 }
+
 .m-t {
   margin-top: 10px;
 }
+
 .m-l {
   margin-left: 10px;
 }
+
 .m-2t {
   margin-top: 30px;
 }
+
 .label-text {
   color: #222;
 }
+
 .label-number {
   color: blue;
   padding-right: 8px;
 }
+
 h4.label-heading {
   font-weight: normal;
   padding-left: 5px;
   margin: 10px 0;
 }
+
 .label-heading.green {
   border-left: 5px solid #26c281;
 }
+
 .label-heading.yellow {
   border-left: 5px solid #faa400;
 }
+
 .ico-share {
   float: right;
   width: 18px;
   height: 28px;
   padding: 5px 12px 0 0;
 }
+
 .ico-share img {
   width: 100%;
   height: 100%;
 }
+
 #footer {
   margin-top: 20px;
   border-top: 1px solid #f2f2f2;
   text-align: center;
 }
+
 #footer a {
   color: #666;
 }
+
 .view-count {
   color: #666;
   font-size: 12px;
   line-height: 12px;
 }
+
 .ico-eye {
   display: inline-block;
   width: 22px;
@@ -165,6 +198,7 @@ h4.label-heading {
   background-size: contain;
   background-position: center;
 }
+
 #guide {
   display: none;
   width: 100%;
@@ -175,56 +209,72 @@ h4.label-heading {
   background-color: rgba(34, 34, 34, 0.7);
   z-index: 101;
 }
+
 #guide img {
   float: right;
 }
 /* similar cars */
 
 .view-header {
+  color: #666;
+  font-size: 14px;
+  background-color: #f8f8f8;
   text-align: center;
+  height: 40px;
+  line-height: 40px;
 }
+
 .car-item {
   text-align: center;
 }
+
 .car-item {
   min-height: 250px;
   margin: 20px 10px;
 }
+
 .car-item img {
   width: 100%;
   height: auto;
 }
+
 .car-item .car-image {
   position: relative;
   font-size: 14px;
   font-weight: bold;
   min-height: 200px;
 }
+
 .car-item .car-image .car-name {
   position: absolute;
   left: 10px;
   bottom: 20px;
   color: white;
 }
+
 .car-item .car-image .car-price {
   position: absolute;
   right: 10px;
   bottom: 20px;
   color: white;
 }
+
 .car-item .car-comments {
   margin-top: 5px;
-  color: #666;
+  color: #333;
   font-size: 12px;
   text-align: left;
   border-bottom: 1px solid rgba(34, 34, 34, 0.3);
 }
+
 .car-item .car-comments p {
   margin-top: 0;
 }
+
 .bold {
   font-weight: bold;
 }
+
 #similars-link {
   cursor: pointer;
   position: absolute;
@@ -234,6 +284,7 @@ h4.label-heading {
   height: 20px;
   z-index: 100;
 }
+
 #similars-link span {
   font-size: 12px;
   border: 1px solid #4FC1E9;
@@ -246,6 +297,7 @@ h4.label-heading {
 .owl-theme .owl-controls {
   margin-top: 0;
 }
+
 .owl-theme .owl-dots .owl-dot span {
   width: 5px;
   height: 5px;
@@ -256,4 +308,69 @@ h4.label-heading {
   font-size: 13px;
   text-align: center;
   margin-top: 10px;
+}
+
+#selector-price, #selector-category, #selector-desc {
+  margin: 10px 15px;
+  font-size: 13px;
+}
+#selector-desc {
+  font-size: 11px;
+  color: #666;
+}
+#selector-category {
+  margin-right: 5px;
+}
+
+.price-item {
+  display: inline-block;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  padding: 5px 10px;
+  color: #4A90E2;
+  border: 1px solid #4A90E2;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.category-container {
+  float: left;
+  display: inline-block;
+  width: 50%;
+}
+
+.category-item {
+  position: relative;
+  margin: 0 10px 5px 0;
+  cursor: pointer;
+}
+.category-item img {
+  width: 100%;
+  height: auto;
+  opacity: 0.7;
+}
+.category-desc {
+  text-align: center;
+  display: inline-block;
+  color: white;
+  position: absolute;
+  top: 25%;
+  font-size: 20px;
+  font-weight: bold;
+  width: 100%;
+}
+.category-state {
+  display: inline-block;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  margin-left: -13px;
+  width: 25px;
+  height: 25px;
+  background-image: url("/images/cats/not-selected.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.category-state.selected {
+  background-image: url("/images/cats/selected.png");
 }

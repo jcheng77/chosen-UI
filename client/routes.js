@@ -206,8 +206,23 @@ if(Meteor.isCordova) {
   });
 }
 
+Router.route('/selector', {
+  template: 'selector',
+  name: 'car.selector',
+  waitOn: function() {
+    return [subs.subscribe('top_cars'), subs.subscribe('top_views')];
+  },
+  onRun: function() {
+    Session.set('htmlTitle', "智能选车");
+    this.next();
+  },
+  fastRender: true
+});
+
 Tracker.autorun(function() {
-  if(Meteor.isClient && Session.get('htmlTitle')) {
-    document.title = "拍立行买车助手:" + Session.get('htmlTitle');
+  var title = "拍立行买车助手"
+  if(Session.get('htmlTitle')) {
+    title = Session.get('htmlTitle') + '-' + title;
   }
+  document.title = title;
 });

@@ -1,0 +1,21 @@
+<template name="selector">
+<div id="selector-price">
+  {{#each priceItems}}
+  <span class="price-item">{{#if lowerThan}}低于{{high}}万{{else}}{{#if higherThan}}高于{{low}}万{{else}}{{low}}~{{high}}万{{/if}}{{/if}}</span>
+  {{/each}}
+</div>
+<div id="selector-desc">
+  <span>请选择3个你的购车需求：</span>
+</div>
+<div id="selector-category">
+  {{#each categories}}
+  <div class="category-container">
+    <div class="category-item">
+      <img src="{{image}}" />
+      <span class="category-desc"><small>我要</small>{{desc}}</span>
+      <span class="category-state {{#if isSelected}}selected{{/if}}"></span>
+    </div>
+  </div>
+  {{/each}}
+</div>
+</template>
