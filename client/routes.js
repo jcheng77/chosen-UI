@@ -146,8 +146,10 @@ Router.route('/car/:serial_id', {
     return [subs.subscribe('car', serial_id), subs.subscribe('view_count', serial_id)];
   },
   onAfterAction: function() {
-    var car = Car.findOne({serial_id: parseInt(Session.get('serial_id'), 10)});
-    if (car) {
+    var car = Car.findOne({
+      serial_id: parseInt(Session.get('serial_id'), 10)
+    });
+    if(car) {
       Session.set('htmlTitle', car.serial_name);
     }
   },
@@ -167,41 +169,45 @@ Router.route('/car/:serial_id/similars', {
   fastRender: true
 });
 
-Router.route('/tops', {
-  template: 'tops',
-  name: 'car.tops',
-  waitOn: function() {
-    return [subs.subscribe('top_cars'), subs.subscribe('top_views')];
-  },
-  onRun: function() {
-    Session.set('htmlTitle', "热门推荐");
-    this.next();
-  },
-  fastRender: true
-});
+//只在phonegap/cordova移动环境才启用这些页面渲染，在web环境下我们用ssr(server side rendering)
+//来减少首页渲染时间，代码在server/ssr.js
+if(Meteor.isCordova) {
+  Router.route('/tops', {
+    template: 'tops',
+    name: 'car.tops',
+    waitOn: function() {
+      return [subs.subscribe('top_cars'), subs.subscribe('top_views')];
+    },
+    onRun: function() {
+      Session.set('htmlTitle', "热门推荐");
+      this.next();
+    },
+    fastRender: true
+  });
 
-Router.route('/recommends', {
-  template: 'recommends',
-  name: 'car.recommends',
-  action: function() {
-    var that = this;
-    Session.set('htmlTitle', "猜你喜欢");
-    Meteor.call('recommend', false /*debugMode*/, function(error, result) {
-      if (result && result.length) {
-        Session.set('recommends', result);
-      }
-      that.render();
-    });
-    this.render('loading');
-  }
-});
+  Router.route('/recommends', {
+    template: 'recommends',
+    name: 'car.recommends',
+    action: function() {
+      var that = this;
+      Session.set('htmlTitle', "猜你喜欢");
+      Meteor.call('recommend', false /*debugMode*/ , function(error, result) {
+        if(result && result.length) {
+          Session.set('recommends', result);
+        }
+        that.render();
+      });
+      this.render('loading');
+    }
+  });
 
-Router.route('/', function() {
-  this.redirect('car.tops');
-});
+  Router.route('/', function() {
+    this.redirect('car.tops');
+  });
+}
 
 Tracker.autorun(function() {
-  if (Meteor.isClient && Session.get('htmlTitle')) {
+  if(Meteor.isClient && Session.get('htmlTitle')) {
     document.title = "拍立行买车助手:" + Session.get('htmlTitle');
   }
 });
