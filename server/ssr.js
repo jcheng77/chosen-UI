@@ -2,6 +2,7 @@ SSR.compileTemplate('head', Assets.getText('template/head.html'));
 SSR.compileTemplate('tops', Assets.getText('template/tops.html'));
 SSR.compileTemplate('car_item', Assets.getText('template/car_item.html'));
 SSR.compileTemplate('recommends', Assets.getText('template/recommends.html'));
+SSR.compileTemplate('share', Assets.getText('template/share.html'));
 
 Template.registerHelper('cssUrl', function() {
   var cssUrl = _.pluck(_.filter(
@@ -60,6 +61,15 @@ Template.registerHelper('tops', function() {
   return tops;
 });
 
+Router.route('/', function() {
+  this.response.writeHead(302, {
+    'Location': '/tops'
+  });
+  this.response.end();
+}, {
+  where: 'server'
+});
+
 Router.route('/tops', function() {
   this.response.end(SSR.render('tops', {
     title: '热门推荐'
@@ -74,11 +84,17 @@ Router.route('/recommends', function() {
 }, {
   where: 'server'
 });
-Router.route('/', function() {
-  this.response.writeHead(302, {
-    'Location': '/tops'
-  });
-  this.response.end();
+
+//诱导分享页面
+Router.route('/share', function() {
+  var url = process.env.ROOT_URL + 'share';
+  var wxConfig = Meteor.call('getJsApiSignature', url);
+  this.response.end(SSR.render('share', {
+    jssdkApi: true,
+    wxConfig: JSON.stringify(wxConfig),
+    originUrl: 'http://mp.weixin.qq.com/s?__biz=MzAwNzE2MzA4Ng==&mid=206117421&idx=5&sn=77c4fd49726cc0fcc647d56ea86a7abb#rd',
+    doneUrl: 'http://mp.weixin.qq.com/s?__biz=MzAwNzE2MzA4Ng==&mid=206116553&idx=1&sn=0de8cb0878755e72aef918c3aeeec3cd#rd'
+  }));
 }, {
   where: 'server'
 });

@@ -32,3 +32,33 @@ Meteor.publish('similar_cars', function(serialId) {
     return [];
   }
 });
+
+Meteor.publish('top_views', function() {
+  return ViewCount.find({}, {
+    limit: 10,
+    sort: {
+      count: -1
+    }
+  }, {
+      fields: {serial_id: 1, serial_name: 1, hd_pics: 1, good_comments: 1, bad_comments: 1, serial_low_price: 1, serial_high_price: 1}
+    });
+});
+//TODO - join view & cars in one query
+Meteor.publish('top_cars', function() {
+  var topIds = ViewCount.find({}, {
+    limit: 10,
+    sort: {
+      count: -1
+    }
+  }).map(function(view) {
+    return view.serial_id;
+  });
+
+  return Car.find({
+    serial_id: {
+      $in: topIds
+    }
+  }, {
+      fields: {serial_id: 1, serial_name: 1, hd_pics: 1, good_comments: 1, bad_comments: 1, serial_low_price: 1, serial_high_price: 1}
+    });
+});
