@@ -24,6 +24,8 @@ http
 check
 reload
 autoupdate
+reactive-var
+fastclick
 
 # Personal
 meteorhacks:fast-render
@@ -33,4 +35,3 @@ natestrauser:animate-css
 richsilv:owl-carousel
 wechat:utils
 meteorhacks:ssr
-reactive-var

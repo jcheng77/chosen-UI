@@ -1,5 +1,3 @@
-AutoCon = new Mongo.Collection('auto_con');
-
 // 服务器启动时从静态文件更新数据库
 Meteor.startup(function() {
   function initData() {
@@ -10,7 +8,7 @@ Meteor.startup(function() {
       }, car);
     });
     delete cars;
-    
+
     var auto_con = JSON.parse(Assets.getText('json/autohome_con_data.json'));
     var id_matches = JSON.parse(Assets.getText('json/match.json'));
     var data = _(auto_con).filter(function(auto) {
@@ -42,10 +40,12 @@ Meteor.startup(function() {
     delete auto_con;
     delete data;
   }
+  if (false) {
   Meteor.setTimeout(function() {
     var before = new Date();
     initData();
     var after = new Date();
     console.log('Data loaded in', (after.getTime() - before.getTime())/1000, 'seconds');
   }, 0);
+  }
 });
