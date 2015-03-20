@@ -42,12 +42,12 @@ Template.selector.onCreated(function() {
     desc: '内饰豪华',
     image: '/images/cats/interior.png'
   }, {
-    title: '省油',
+    title: '油耗',
     desc: '省油经济',
     image: '/images/cats/ecom.png'
   }, {
-    title: '安全性',
-    desc: '安全性好',
+    title: '性价比',
+    desc: '性价比好',
     image: '/images/cats/security.png'
   }];
   _(this.categories).each(function(cat) {
@@ -72,6 +72,10 @@ Template.selector.onCreated(function() {
       });
     }
   });
+});
+
+Template.selector.onRendered(function() {
+  // this.$('#selector-result').css('transform', 'translate(0,-' + this.$('#selector').height() +'px)');
 });
 
 Template.selector.helpers({
@@ -111,13 +115,13 @@ Template.selector.helpers({
   results: function() {
     var cars = Car.find({}).fetch();
     var selectedPrice = Template.instance().selectedPrice.get();
-    if (selectedPrice) {
+    if(selectedPrice) {
       cars = _(cars).filter(function(car) {
         var low = parseFloat(car.serial_low_price);
         var high = parseFloat(car.serial_high_price);
-        if (selectedPrice.low && selectedPrice.high) {
+        if(selectedPrice.low && selectedPrice.high) {
           return selectedPrice.low < low && selectedPrice.high > high;
-        } else if (selectedPrice.low) {
+        } else if(selectedPrice.low) {
           return low >= selectedPrice.low;
         } else {
           return high <= selectedPrice.high;

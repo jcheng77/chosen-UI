@@ -397,9 +397,6 @@ h4.label-heading {
 .hide {
   display: none;
 }
-.minimized {
-  height: 0;
-}
 #selector-result #re-chooser {
   text-align: center;
 }
