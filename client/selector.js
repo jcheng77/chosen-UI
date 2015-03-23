@@ -117,14 +117,15 @@ Template.selector.helpers({
     var selectedPrice = Template.instance().selectedPrice.get();
     if(selectedPrice) {
       cars = _(cars).filter(function(car) {
+        // using low/high price as comparator
         var low = parseFloat(car.serial_low_price);
         var high = parseFloat(car.serial_high_price);
         if(selectedPrice.low && selectedPrice.high) {
-          return selectedPrice.low < low && selectedPrice.high > high;
+          return (selectedPrice.low < low && selectedPrice.high > low) || (selectedPrice.low < high && selectedPrice.high > high);
         } else if(selectedPrice.low) {
-          return low >= selectedPrice.low;
+          return low >= selectedPrice.low || high > selectedPrice.low;
         } else {
-          return high <= selectedPrice.high;
+          return low <= selectedPrice.high || high < selectedPrice.high;
         }
       });
     }
