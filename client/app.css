@@ -344,7 +344,8 @@ h4.label-heading {
   cursor: pointer;
 }
 .price-item.selected {
-  background-color: #333;
+  background-color: #4A90E2;
+  color: #fff;
 }
 
 .category-container {
@@ -363,6 +364,11 @@ h4.label-heading {
   width: 100%;
   height: auto;
   opacity: 0.7;
+}
+.category-item .mask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 .category-desc {
   text-align: center;
