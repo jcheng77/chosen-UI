@@ -1,0 +1,21 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>{{#if title}}{{title}}-拍立行买车助手{{else}}拍立行买车助手{{/if}}</title>
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?57b1e19d8f395734f0e1b028297e950b";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  {{#if cssUrl}}
+  <link rel="stylesheet" href="{{cssUrl}}" /> {{/if}}
+  {{#if jssdkApi}}
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+  {{/if}}
+  <script src="http://cdn.staticfile.org/fastclick/1.0.3/fastclick.min.js"></script>
+</head>

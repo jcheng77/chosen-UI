@@ -1,4 +1,7 @@
 svn update ../auto2o
+#rm -f ../auto2o/programs/web.browser/*.css
+#rm -f ../auto2o/programs/web.browser/*.js
+#svn st ../auto2o | grep '^!' | awk '{print $2}' | xargs svn delete --force
 
 demeteorizer -o ../build
 cp -Rf ../build/* ../auto2o/

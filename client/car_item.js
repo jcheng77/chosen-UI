@@ -4,7 +4,7 @@ Template.car_item.helpers({
     if (car.hd_pics && car.hd_pics.length) {
       return car.hd_pics[0];
     } else {
-      return "";
+      return "http://data.auto.qq.com/" + car.serial_pic;
     }
   }
 });
