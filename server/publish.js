@@ -139,3 +139,24 @@ Meteor.publish('filtered_cars', function(targePrice, targetCats) {
     limit: 30
   });
 });
+Meteor.publish('cars_by_dir', function(dir) {
+  var cursor = Car.find({
+    serial_use_way: {
+      $regex: new RegExp(dir)
+    }
+  }, {
+    fields: {
+      serial_id: 1,
+      serial_name: 1,
+      hd_pics: 1,
+      good_comments: 1,
+      bad_comments: 1,
+      serial_low_price: 1,
+      serial_high_price: 1,
+      serial_pic: 1,
+      serial_use_way: 1
+    },
+    limit: 30
+  });
+  return cursor;
+});

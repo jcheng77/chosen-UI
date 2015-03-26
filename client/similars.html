@@ -1,6 +1,6 @@
 <template name="similars">
-  <div class="view-header">
-    <h4>相似车型</h4>
-  </div>
+  {{#contentFor 'header'}}
+  <h4>相似车型</h4>
+  {{/contentFor}}
   {{#each similarCars}} {{>car_item}} {{/each}}
 </template>

@@ -1,45 +1,42 @@
 <template name="selector">
-  <div class="view-header">
-    <h4>智能选车
-      <span id="re-chooser" class="btn pull-right {{#if isGo}}animated tada{{else}}hide{{/if}}">重新挑选</span>
-    </h4>
-  </div>
+  {{#contentFor 'header'}}
+  <h4>
+    智能选车
+  </h4>
+  {{/contentFor}}
+  <button type="button" id="re-chooser" class="btn btn-primary {{#if isGo}}animated tada{{else}}hide{{/if}}">重新挑选</button>
   <div id="selector" class="animated {{#if isGo}}hide{{else}}slideInDown{{/if}}">
     <div id="selector-price">
       {{#each priceItems}}
       <span class="price-item {{#if isPriceSelected}}selected{{/if}}">{{#if lowerThan}}低于{{high}}万{{else}}{{#if higherThan}}高于{{low}}万{{else}}{{low}}~{{high}}万{{/if}}{{/if}}</span>
       {{/each}}
     </div>
-    <div id="selector-desc">
-      <span>请选择
-        <strong>3个</strong>你的购车需求：</span>
-    </div>
-    <div id="selector-category">
-      {{#each categories}}
-      <div class="category-container">
-        <div class="category-item animated fadeInUp">
-          <img src="{{image}}" />
-          <span class="category-desc">
-            <small>我要</small>{{desc}}</span>
-          <span class="category-state {{#if isCatSelected}}selected{{/if}}"></span>
-          <div class="mask"></div>
-        </div>
+    <div class="panel panel-default">
+      <div id="selector-desc" class="panel-heading">
+        <span>请选择
+          <strong>3个</strong>你的购车需求：</span>
       </div>
-      {{/each}}
-      <div class="clearfix"></div>
+      <div id="selector-category" class="row panel-body">
+        {{#each categories}}
+        <div class="category-container col-xs-6 col-sm-3 col-md-4">
+          <div class="category-item">
+            <img src="{{image}}" />
+            <span class="category-desc">
+              <small>我要</small>{{desc}}</span>
+            <span class="category-state {{#if isCatSelected}}selected{{/if}}"></span>
+            <div class="mask"></div>
+          </div>
+        </div>
+        {{/each}}
+        <div class="clearfix"></div>
+      </div>
     </div>
   </div>
   <div id="selector-result" class="{{#if isGo}}animated slideInUp{{else}}hide{{/if}}">
-    {{#if isLoading}}
-    {{>loading}}
-    {{else}}
-    {{#if results}}
-    {{#each results}} {{>car_item}} {{/each}}
-    {{else}}
+    {{#if isLoading}} {{>loading}} {{else}} {{#if results}} {{#each results}} {{>car_item}} {{/each}} {{else}}
     <div class="warning">
       <span>我们暂时没有找到符合您需求的车型，您可以重新指定条件进行挑选！</span>
     </div>
-    {{/if}}
-    {{/if}}
+    {{/if}} {{/if}}
   </div>
 </template>

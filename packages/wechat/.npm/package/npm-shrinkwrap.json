@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "jssha": {
-      "version": "1.5.0"
+      "version": "http://registry.npm.taobao.org/jssha/download/jssha-1.5.0.tgz"
     }
   }
 }

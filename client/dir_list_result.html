@@ -1,0 +1,10 @@
+<template name="dir_list_result">
+  {{#contentFor 'header'}}
+  <h4>
+    分类推荐
+  </h4>
+  {{/contentFor}}
+  {{#each cars}}
+  {{>car_item}}
+  {{/each}}
+</template>

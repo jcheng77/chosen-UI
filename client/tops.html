@@ -1,6 +1,6 @@
 <template name="tops">
-  <div class="view-header">
-    <h4>热门推荐</h4>
-  </div>
+  {{#contentFor 'header'}}
+  <h4>热门推荐</h4>
+  {{/contentFor}}
   {{#each tops}} {{>car_item}} {{/each}}
 </template>

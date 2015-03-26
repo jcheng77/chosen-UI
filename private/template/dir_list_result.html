@@ -1,10 +1,15 @@
-<template name="layout">
+<html>
+{{>head}}
+
+<body>
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="view-header">
-      {{>yield 'header'}}
+      <h4>分类推荐</h4>
     </div>
   </nav>
   <div id="main" class="container">
-  {{>yield}}
+    {{#each cars}} {{>car_item}} {{/each}}
   </div>
-</template>
+</body>
+
+</html>

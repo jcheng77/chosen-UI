@@ -1,12 +1,12 @@
 <template name="car_item">
   {{#if notBadData}}
-  <div class="car-item animated fadeInRight">
-    <div class="car-image">
+  <div class="panel panel-default car-item animated slideInRight">
+    <div class="panel-body car-image">
       <a href="{{pathFor 'car.comments'}}"><img src="{{thumbImageUrl}}" /></a>
       <span class="car-name">{{serial_name}}</span>
       <span class="car-price">{{serial_low_price}}万-{{serial_high_price}}万</span>
     </div>
-    <div class="car-comments">
+    <div class="panel-footer car-comments">
       <p>
         <span class="label-heading green bold">优点:</span>
         {{#if goodComments}} {{#each goodComments}}

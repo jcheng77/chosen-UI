@@ -1,8 +1,9 @@
 // 服务器启动时从静态文件更新数据库
 Meteor.startup(function() {
   function initData() {
-    var cars = JSON.parse(Assets.getText('cars.json'));
+    var cars = JSON.parse(Assets.getText('json/cars-new.json'));
     _(cars).each(function(car) {
+      delete car._id;
       Car.upsert({
         serial_id: car.serial_id
       }, car);
@@ -40,7 +41,7 @@ Meteor.startup(function() {
     delete auto_con;
     delete data;
   }
-  if (false) {
+  if (true) {
   Meteor.setTimeout(function() {
     var before = new Date();
     initData();

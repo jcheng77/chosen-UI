@@ -145,6 +145,11 @@ Router.route('/car/:serial_id', {
     }
     return [subs.subscribe('car', serial_id), subs.subscribe('view_count', serial_id)];
   },
+  data: function() {
+    return Car.findOne({
+      serial_id: parseInt(Session.get('serial_id'), 10)
+    });
+  },
   onAfterAction: function() {
     var car = Car.findOne({
       serial_id: parseInt(Session.get('serial_id'), 10)
@@ -199,6 +204,18 @@ if(Meteor.isCordova) {
       });
       this.render('loading');
     }
+  });
+
+  Router.route('/dirs', {
+    template: 'dir_list',
+    name: 'car.dir'
+  });
+  Router.route('/dirs/:dir_name', {
+    template: 'dir_list_result',
+    name: 'car.dir_result',
+    waitOn: function() {
+      return [Meteor.subscribe('cars_by_dir', this.params.dir_name)];
+    },
   });
 
   Router.route('/', function() {

@@ -1,0 +1,27 @@
+<template name="dir_list">
+  {{#contentFor 'header'}}
+  <h4>
+    分类推荐
+  </h4>
+  {{/contentFor}}
+  <div class="animated slideInDown">
+    <div class="panel panel-default">
+      <div id="dir_list" class="row panel-body">
+        {{#each dirs}}
+        <div class="dir-container col-xs-6 col-sm-3 col-md-4">
+          <a href="{{pathFor 'car.dir_result'}}">
+            <div class="dir-item">
+              <img src="{{image}}" />
+              <span class="dir-desc">
+                {{title}}</span>
+              <span class="dir-state">{{desc}}</span>
+              <div class="mask"></div>
+            </div>
+          </a>
+        </div>
+        {{/each}}
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</template>

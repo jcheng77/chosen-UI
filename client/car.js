@@ -54,6 +54,13 @@ Template.car.helpers({
     } else {
       return label;
     }
+  },
+  images: function() {
+    if (this.hd_pics.map) {
+      return this.hd_pics;
+    } else {
+      return JSON.parse(this.hd_pics);
+    }
   }
 });
 

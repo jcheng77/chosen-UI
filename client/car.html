@@ -1,37 +1,40 @@
 <template name="car">
   {{#with car}}
   <!-- header -->
+  {{#contentFor 'header'}}
   <div id="car-header">
     <span>{{serial_name}}
       <small>{{serial_low_price}}万~{{serial_high_price}}万</small>
     </span>
-    {{#if jsApiReady}}
+  </div>
+  {{/contentFor}}
+  {{#if jsApiReady}}
     <a id="share" class="ico-share">
       <img src="/images/white_share.png" />
     </a>
-    {{/if}}
-  </div>
-
+  {{/if}}
+  <div class="row">
   <!-- images -->
-  <div style="position:relative;">
+  <div class="col-xs-12 col-sm-8" style="position:relative;padding:0;">
     <div id="slider" class="owl-carousel owl-theme">
-      {{#each hd_pics}}
+      {{#each images}}
       <div class="item image">
         <img src="{{this}}" />
       </div>
       {{/each}}
     </div>
     <!-- labels on the image-->
-    <div id="labels" class="animated fadeInUp">
+    <div id="labels" class="">
       {{#each labels 5}}
-      <div class="label x{{labelLength this}}">{{cutLabel this}}</div>
+      <div class="animated tada label x{{labelLength this}}">{{cutLabel this}}</div>
       {{/each}}
     </div>
-    <div id="similars-link" class="animated fadeInRight">
-      <span>相似车型</span>
+    <div id="similars-link" class="animated slideInRight">
+      <button class="btn btn-primary">相似车型</button>
     </div>
   </div>
 
+  <div class="col-xs-12 col-sm-4">
   <!-- labels inputs -->
   <div class="m-l">
     <i class="ico-eye"></i>
@@ -70,6 +73,8 @@
     <div id="footer">
       <a href="http://mp.weixin.qq.com/s?__biz=MzAwNzE2MzA4Ng==&mid=205812187&idx=1&sn=0d2921e3474548dfe4f1226d47522682#rd">关注公众号</a>
     </div>
+  </div>
+  </div>
   </div>
 
   <!-- share guide -->

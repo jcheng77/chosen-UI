@@ -8,7 +8,7 @@ Template.registerHelper('badComments', function() {
 });
 Template.registerHelper('notBadData', function() {
   var car = this;
-  return car && car.good_comments;
+  return car.hd_pics && car.hd_pics.length;
 });
 
 isWeixinClient = function isWeixinClient() {
