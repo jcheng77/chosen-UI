@@ -12,10 +12,13 @@ meteor
 ###publish?###
 
 ```
+npm install -g mup
 #publish for staging testing
-./publish.sh
+cd deploy/staging
+mup deploy #make sure your ssh key been added into server (ask me if not)
 #publish for production
-./publish_prod.sh
+cd deploy/prod
+mup deploy #make sure your ssh key been added into server (ask me if not)
 ```
 
 
