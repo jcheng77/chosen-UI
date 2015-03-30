@@ -403,3 +403,6 @@ h4.label-heading {
   padding: 3px 6px;
   font-size: 12px;
 }
+.lazy-hidden {
+  background: #eee url('http://cdn.staticfile.org/jquery.lazyloadxt/1.0.5/loading.gif') no-repeat 50% 50%;
+}

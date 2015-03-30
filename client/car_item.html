@@ -1,8 +1,8 @@
 <template name="car_item">
   {{#if notBadData}}
-  <div class="panel panel-default car-item animated slideInRight">
+  <div class="panel panel-default car-item">
     <div class="panel-body car-image">
-      <a href="{{pathFor 'car.comments'}}"><img src="{{thumbImageUrl}}" /></a>
+      <a href="{{pathFor 'car.comments'}}"><img data-src="{{thumbImageUrl}}" /></a>
       <span class="car-name">{{serial_name}}</span>
       <span class="car-price">{{serial_low_price}}万-{{serial_high_price}}万</span>
     </div>

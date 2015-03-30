@@ -32,7 +32,7 @@
       </div>
     </div>
   </div>
-  <div id="selector-result" class="{{#if isGo}}animated slideInUp{{else}}hide{{/if}}">
+  <div id="selector-result" class="{{#if isGo}}{{else}}hide{{/if}}">
     {{#if isLoading}} {{>loading}} {{else}} {{#if results}} {{#each results}} {{>car_item}} {{/each}} {{else}}
     <div class="warning">
       <span>我们暂时没有找到符合您需求的车型，您可以重新指定条件进行挑选！</span>

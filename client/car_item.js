@@ -8,3 +8,7 @@ Template.car_item.helpers({
     }
   }
 });
+Template.car_item.onRendered(function() {
+  this.$('.car-image img').lazyLoadXT();
+  Meteor.setTimeout(function() {$(window).trigger('scroll');}, 2000);
+});

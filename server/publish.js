@@ -134,9 +134,12 @@ Meteor.publish('filtered_cars', function(targePrice, targetCats) {
       bad_comments: 1,
       serial_low_price: 1,
       serial_high_price: 1,
-      serial_pic: 1
+      serial_pic: 1,
+      font_score: 1
     },
-    limit: 30
+    sort: {
+      font_score: -1
+    }
   });
 });
 Meteor.publish('cars_by_dir', function(dir) {
