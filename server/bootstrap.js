@@ -41,7 +41,7 @@ Meteor.startup(function() {
     delete auto_con;
     delete data;
   }
-  if (true) {
+  if (false) {
   Meteor.setTimeout(function() {
     var before = new Date();
     initData();

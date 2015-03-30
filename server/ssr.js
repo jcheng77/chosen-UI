@@ -119,7 +119,7 @@ Router.route('/', function() {
 
 Router.route('/tops', function() {
   this.response.writeHead(200, {
-    "cache-control": 'public, max-age=86400'
+    "cache-control": 'public, max-age=3600'
   });
   this.response.end(SSR.render('tops', {
     title: '热门推荐'
@@ -129,7 +129,7 @@ Router.route('/tops', function() {
 });
 Router.route('/recommends', function() {
   this.response.writeHead(200, {
-    "cache-control": 'public, max-age=86400'
+    "cache-control": 'public, max-age=3600'
   });
   this.response.end(SSR.render('recommends', {
     title: '猜你喜欢'
@@ -140,7 +140,7 @@ Router.route('/recommends', function() {
 
 Router.route('/dirs', function() {
   this.response.writeHead(200, {
-    "cache-control": 'public, max-age=86400'
+    "cache-control": 'public, max-age=3600'
   });
   this.response.end(SSR.render('dir_list', {
     title: '分类推荐'
@@ -150,7 +150,7 @@ Router.route('/dirs', function() {
 });
 Router.route('/dirs/:dir_name', function() {
   this.response.writeHead(200, {
-    "cache-control": 'public, max-age=86400'
+    "cache-control": 'public, max-age=3600'
   });
   var cursor = Car.find({
     serial_use_way: {
