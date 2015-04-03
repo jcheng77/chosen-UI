@@ -262,12 +262,11 @@ h4.label-heading {
   font-weight: bold;
 }
 
-#similars-link {
+#links {
   cursor: pointer;
   position: absolute;
   bottom: -10px;
   right: 10px;
-  width: 80px;
   height: 20px;
   z-index: 100;
 }
@@ -405,4 +404,27 @@ h4.label-heading {
 }
 .lazy-hidden {
   background: #eee url('http://cdn.staticfile.org/jquery.lazyloadxt/1.0.5/loading.gif') no-repeat 50% 50%;
+}
+
+.ticheji-item {
+  padding: 5px;
+  border-radius: 2px;
+  color: #333;
+}
+.ticheji-item h4 {
+  font-size: 15px;
+  font-weight: bold;
+  margin: 5px 0;
+}
+.ticheji-author, .ticheji-date, .ticheji-replies {
+  padding-left: 5px;
+  font-size: 11px;
+  color: #666;
+}
+.ticheji-author {
+  padding-left: 10px;
+}
+.ticheji-item p {
+  margin: 10px 0;
+  font-size: 12px;
 }

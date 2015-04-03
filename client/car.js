@@ -78,17 +78,10 @@ function handleGuideClicked(e, t) {
   t.$('#guide').hide();
 }
 
-function handleSimilarsClicked(e) {
-  Router.go("car.similars", {
-    serial_id: this.serial_id
-  });
-}
-
 Template.car.events({
   'click .image': handleImageClicked,
   'click .ico-share': handleShareClicked,
-  'click #guide': handleGuideClicked,
-  'click #similars-link': handleSimilarsClicked
+  'click #guide': handleGuideClicked
 });
 
 Template.car.rendered = function() {

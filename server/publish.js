@@ -1,3 +1,4 @@
+var Match = new Mongo.Collection('match');
 //数据发布
 Meteor.publish('car', function(serialId) {
   return Car.find({
@@ -162,4 +163,23 @@ Meteor.publish('cars_by_dir', function(dir) {
     limit: 30
   });
   return cursor;
+});
+Meteor.publish('ticheji_by_sid', function(sid) {
+  var match = Match.findOne({tSId: sid});
+  if (!match) {
+    return [];
+  }
+  return Ticheji.find({
+    sid: match.aSId
+  }, {
+    fields: {
+      sid: 1,
+      'articles.author': 1,
+      'articles.url': 1,
+      'articles.title': 1,
+      'articles.replies': 1,
+      'articles.date': 1,
+      'articles.desc': 1
+    }
+  });
 });

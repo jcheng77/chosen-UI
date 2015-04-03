@@ -174,6 +174,18 @@ Router.route('/car/:serial_id/similars', {
   fastRender: true
 });
 
+Router.route('/car/:serial_id/ticheji', {
+  template: 'ticheji',
+  name: "car.ticheji",
+  waitOn: function() {
+    return [Meteor.subscribe('ticheji_by_sid', this.params.serial_id)];
+  },
+  data: function() {
+    return Ticheji.findOne();
+  },
+  fastRender: true
+});
+
 //只在phonegap/cordova移动环境才启用这些页面渲染，在web环境下我们用ssr(server side rendering)
 //来减少首页渲染时间，代码在server/ssr.js
 if(Meteor.isCordova) {

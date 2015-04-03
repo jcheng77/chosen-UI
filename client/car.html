@@ -29,8 +29,9 @@
       <div class="animated tada label x{{labelLength this}}">{{cutLabel this}}</div>
       {{/each}}
     </div>
-    <div id="similars-link" class="animated slideInRight">
-      <button class="btn btn-primary">相似车型</button>
+    <div id="links" class="animated slideInRight">
+      <a class="btn btn-primary" href="{{pathFor 'car.similars'}}">相似车型</a>
+      <a class="btn btn-primary" href="{{pathFor 'car.ticheji'}}">提车记</a>
     </div>
   </div>
 

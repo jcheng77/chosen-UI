@@ -1,0 +1,18 @@
+<template name="ticheji">
+  {{#contentFor 'header'}}
+  <h4>提车记</h4>
+  {{/contentFor}}
+  {{#each articles}}
+  <div class="panel panel-default ticheji-item">
+    <div class="panel-body car-image">
+      <h4>{{title}}</h4>
+      <span class="ticheji-author">{{author}}</span>
+      <span class="ticheji-date">发表于{{date}}</span>
+      <span class="ticheji-replies">{{replies}}条回复</span>
+      <p>
+        {{desc}}
+      </p>
+    </div>
+  </div>
+  {{/each}}
+</template>
