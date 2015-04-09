@@ -185,7 +185,7 @@ Router.route('/share', function() {
   this.response.end(SSR.render('share', {
     jssdkApi: true,
     wxConfig: JSON.stringify(wxConfig),
-    originUrl: 'http://mp.weixin.qq.com/s?__biz=MzAwNzE2MzA4Ng==&mid=206117421&idx=5&sn=77c4fd49726cc0fcc647d56ea86a7abb#rd',
+    originUrl: 'http://mp.weixin.qq.com/s?__biz=MzAwNzE2MzA4Ng==&mid=206790339&idx=5&sn=c6181cb3050224bea87673c7a691a4f6#rd',
     doneUrl: 'http://mp.weixin.qq.com/s?__biz=MzAwNzE2MzA4Ng==&mid=206116553&idx=1&sn=0de8cb0878755e72aef918c3aeeec3cd#rd'
   }));
 }, {
