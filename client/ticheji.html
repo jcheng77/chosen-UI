@@ -16,3 +16,12 @@
   </div>
   {{/each}}
 </template>
+<template name="ticheji.detail">
+  {{#contentFor 'header'}}
+  <h4>提车记</h4>
+  {{/contentFor}}
+  {{#if isLoading}}
+  {{>loading}}
+  {{/if}}
+  <iframe src="{{url}}" class="{{#if isLoading}}hide{{/if}}"></iframe>
+</template>

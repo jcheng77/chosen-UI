@@ -186,6 +186,17 @@ Router.route('/car/:serial_id/ticheji', {
   fastRender: true
 });
 
+Router.route('/ticheji/:url', {
+  template: 'ticheji.detail',
+  name: "car.ticheji.detail",
+  data: function() {
+    var uint8Array = Base64.decode(this.params.url);
+    return {
+      url: String.fromCharCode.apply(null, uint8Array)
+    };
+  }
+});
+
 //只在phonegap/cordova移动环境才启用这些页面渲染，在web环境下我们用ssr(server side rendering)
 //来减少首页渲染时间，代码在server/ssr.js
 if(Meteor.isCordova) {
