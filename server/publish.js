@@ -23,6 +23,34 @@ Meteor.publish('view_count', function(serialId) {
   });
 });
 
+Meteor.publishComposite('car_with_viewcount', function(serialId) {
+  return {
+    find: function() {
+      return Car.find({
+        serial_id: serialId
+      }, {
+        fields: {
+          serial_id: 1,
+          serial_name: 1,
+          hd_pics: 1,
+          labels: 1,
+          good_comments: 1,
+          bad_comments: 1,
+          serial_low_price: 1,
+          serial_high_price: 1
+        }
+      });
+    },
+    children: [{
+      find: function(car) {
+        return ViewCount.find({
+          serial_id: serialId
+        });
+      }
+    }]
+  }
+});
+
 Meteor.publish('similar_cars', function(serialId) {
   var car = Car.findOne({
     serial_id: serialId
@@ -50,6 +78,50 @@ Meteor.publish('similar_cars', function(serialId) {
     return [];
   }
 });
+
+Meteor.publishComposite('car_and_similars', function(serialId) {
+  return {
+    find: function() {
+      return Car.find({
+        serial_id: serialId
+      }, {
+        fields: {
+          serial_id: 1,
+          serial_name: 1,
+          hd_pics: 1,
+          labels: 1,
+          good_comments: 1,
+          bad_comments: 1,
+          serial_low_price: 1,
+          serial_high_price: 1,
+          serial_competion: 1
+        }
+      });
+    },
+    children: [{
+      find: function(car) {
+        var similar_ids = _(car.serial_competion).map(function(comp) {
+          return parseInt(comp.serial_id, 10);
+        });
+        return Car.find({
+          serial_id: {
+            $in: similar_ids
+          }
+        }, {
+          fields: {
+            serial_id: 1,
+            serial_name: 1,
+            hd_pics: 1,
+            good_comments: 1,
+            bad_comments: 1,
+            serial_low_price: 1,
+            serial_high_price: 1
+          }
+        });
+      }
+    }]
+  }
+})
 
 Meteor.publish('top_views', function() {
   return ViewCount.find({}, {

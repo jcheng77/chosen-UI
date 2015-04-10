@@ -143,7 +143,7 @@ Router.route('/car/:serial_id', {
     if(Meteor.isClient) {
       Session.set('serial_id', serial_id);
     }
-    return [subs.subscribe('car', serial_id), subs.subscribe('view_count', serial_id)];
+    return [subs.subscribe('car_with_viewcount', serial_id)];
   },
   data: function() {
     return Car.findOne({
@@ -158,7 +158,7 @@ Router.route('/car/:serial_id', {
       Session.set('htmlTitle', car.serial_name);
     }
   },
-  fastRender: true
+  fastRender: false
 });
 
 Router.route('/car/:serial_id/similars', {
@@ -169,7 +169,7 @@ Router.route('/car/:serial_id/similars', {
     if(Meteor.isClient) {
       Session.set('serial_id', serial_id);
     }
-    return [subs.subscribe('car', serial_id), subs.subscribe('similar_cars', serial_id)];
+    return [subs.subscribe('car_and_similars', serial_id)];
   },
   fastRender: true
 });
