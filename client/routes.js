@@ -131,9 +131,9 @@ Router.onRun(configWeixinJsApiOnRun, {
   only: ['car.comments']
 });
 
-Router.onBeforeAction(authWithWechatBeforeAction, {
-  only: ['car.comments', 'car.recommends']
-});
+// Router.onBeforeAction(authWithWechatBeforeAction, {
+//   only: ['car.comments', 'car.recommends']
+// });
 
 Router.route('/car/:serial_id', {
   template: 'car',
